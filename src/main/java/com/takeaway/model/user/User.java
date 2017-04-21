@@ -1,7 +1,5 @@
 package com.takeaway.model.user;
 
-import org.springframework.stereotype.Controller;
-
 import javax.persistence.*;
 
 @Entity
