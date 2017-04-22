@@ -14,6 +14,8 @@ public class Course {
 
     private String img;
 
+    private Integer type;
+
     private Long price;
 
     private Long volume;
@@ -56,5 +58,13 @@ public class Course {
 
     public void setVolume(Long volume) {
         this.volume = volume;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }
