@@ -1,8 +1,9 @@
 $.get('login/getLoginInfo', (res) => {
-    if (res === null) { // 未登陆
+    console.log(res);
+    if (!res) { // 未登陆
         $('#noLogin').css("display", "block");
     } else { // 已登录
-        $('#loggedName').text(res.userName);
+        $('#userName').text(res.userName);
         $('#userMsg').css("display", "block");
     }
 });
@@ -132,6 +133,16 @@ $('#login-submit').click(function() {
         return false;
     }
     // do login ...
+    $.post('login', { userName: name, password: pwd }, (res) => {
+        if (res.code === '1') {
+            alert(res.msg);
+            return false;
+        } else if (res.code === '0') {
+            // 登陆成功
+            window.location.reload();
+            $('.close').click();
+        }
+    });
 
 });
 

@@ -7,7 +7,7 @@
         <title>O2O外卖系统</title>
         <link rel="stylesheet" type="" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="" href="css/animate.css">
-        <link rel="stylesheet" type="" href="css/index.css">
+        <link rel="stylesheet" type="" href="css/header.css">
     </head>
 
     <body>
@@ -19,9 +19,9 @@
                     <span id="register">注册</span>
                 </div>
                 <div class="login-item" id="userMsg">
-                    <span id="userName"></span>
-                    <span class="line"></span>
                     <span id="cancellation">注销</span>
+                    <span class="line"></span>
+                    <span id="userName"></span>
                 </div>
             </div>
             <div class="dlg login-margin">

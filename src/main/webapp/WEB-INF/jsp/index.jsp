@@ -17,6 +17,7 @@
                 <input type="text" id="search-input" class="form-control" placeholder="请搜索美食">
                 <span class="input-group-addon" id="search-btn"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
             </div>
+            <a href="main"><button type="button" class="btn btn-warning near">查看附近美食</button></a>
         </div>
 
         <canvas id="reactive-bg-canvas"></canvas>

@@ -1,0 +1,106 @@
+.menu {
+    position: fixed;
+    height: 40px;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    background: rgba(255,209,97,1);
+    text-align: center;
+    box-sizing: border-box;
+    padding-right: 150px;
+    z-index: 2;
+}
+
+.menu .login-item {
+    display: none;
+}
+
+.menu span {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 20px;
+    font-family: 'Microsoft Yahei', Arial, Helvetica, sans-serif;
+    text-align: center;
+    line-height: 40px;
+    color: #20a0ff;
+    float: right;
+}
+
+.menu span:hover {
+    color: #ffd161;
+}
+
+.menu .line {
+    box-sizing: border-box;
+    height: 40px;
+    border-right: 1px solid rgba(32, 160, 255, 0.4);
+    margin: 0px 10px;
+}
+
+
+.dlg {
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    top: calc(50% - 150px);
+    left: calc(50% - 200px);
+    background: rgba(200, 200, 200, 1);
+    border: solid 1px #ffd161;
+    z-index: 10;
+    border-radius: 10px;
+    visibility: hidden;
+}
+
+.dlg .close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.dlg.show {
+    visibility: visible;
+}
+
+.dlg .subtitle {
+    margin-left: 40px;
+    line-height: 50px;
+    font-size: 24px;
+    font-family: 'Microsoft Yahei';
+    color: #3a90d0;
+}
+
+.dlg .input-margin {
+    position: absolute;
+    left: 40px;
+    top: 50px;
+    width: 320px;
+}
+
+.login-margin .input-margin {
+    top: 80px;
+}
+
+.dlg .input-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.dlg .input-group-addon {
+    width: 85px;
+}
+
+.dlg .btn-submit {
+    width: 320px;
+}
+
+.err-tips {
+    position: absolute;
+    display: inline-block;
+    bottom: -20px;
+    left: 85px;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    margin: -20px 0px 0px 0px;
+    color: red;
+}
