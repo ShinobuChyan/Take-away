@@ -25,10 +25,10 @@ public class MainController {
     public String userMain(String searchContent) {
 
         if (searchContent == null || "".equals(searchContent))
-            return "userMain";
+            return "main";
 
         // TODO 中文搜索
-        return null;
+        return "main";
     }
 
     @RequestMapping(value = "/courseSearch", method = RequestMethod.POST)

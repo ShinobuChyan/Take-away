@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/register")
 public class RegisterController {
@@ -30,9 +32,9 @@ public class RegisterController {
 
     @RequestMapping(method = RequestMethod.POST)
     public
-    CommonResponse register(String userName, String password) {
+    CommonResponse register(String userName, String password, HttpSession session) {
 
-        if (registerService.register(userName, password))
+        if (registerService.register(userName, password, session))
             return new CommonResponse("0", "注册成功");
         else
             return new CommonResponse("1", "网络连接失败，请稍后重试");

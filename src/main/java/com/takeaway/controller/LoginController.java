@@ -1,5 +1,6 @@
 package com.takeaway.controller;
 
+import com.takeaway.model.response.CommonResponse;
 import com.takeaway.model.user.User;
 import com.takeaway.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +25,18 @@ public class LoginController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public
-    String login(String username, String password, HttpSession session) throws Exception {
+    public CommonResponse login(String userName, String password, HttpSession session) throws Exception {
 
-        User user = userRepository.findByUserNameAndPassword(username, password);
+        User user = userRepository.findByUserNameAndPassword(userName, password);
 
         // 若未找到对应用户则返回-1
         if (user == null)
-            return "-1";
+            return new CommonResponse("-1", "登陆失败");
 
         // 保存用户登陆信息
         session.setAttribute("userInfo", user);
 
-        return user.getType().toString();
+        return new CommonResponse("0", "登陆成功");
     }
 
     @RequestMapping(value = "/getLoginInfo", method = RequestMethod.GET)

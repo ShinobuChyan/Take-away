@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 public class RegisterServiceImpl implements RegisterService {
 
@@ -21,7 +23,7 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public boolean register(String userName, String password) {
+    public boolean register(String userName, String password, HttpSession session) {
 
         if (userRepository.countByUserName(userName) > 0)
             return false;
@@ -31,6 +33,7 @@ public class RegisterServiceImpl implements RegisterService {
         user.setPassword(password);
         user.setType(0);
         userRepository.save(user);
+        session.setAttribute("userInfo", user);
 
         return true;
     }

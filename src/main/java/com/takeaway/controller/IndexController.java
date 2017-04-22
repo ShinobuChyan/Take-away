@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping(value = "/index")
+@RequestMapping(value = {"/", "/index"})
 public class IndexController {
 
     @RequestMapping
