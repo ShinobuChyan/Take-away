@@ -114,6 +114,18 @@ body {
     width: 320px;
 }
 
+.err-tips {
+    position: absolute;
+    display: inline-block;
+    bottom: -20px;
+    left: 85px;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    margin: -20px 0px 0px 0px;
+    color: red;
+}
+
 #error-tips {
     position: absolute;
     background: rgba(255, 6, 6, 0.8);
