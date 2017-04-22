@@ -7,10 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 
-@Controller
+@RestController
 @RequestMapping(value = "/login")
 public class LoginController {
 
@@ -22,9 +23,8 @@ public class LoginController {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.POST)
     public
-    @ResponseBody
     String login(String username, String password, HttpSession session) throws Exception {
 
         User user = userRepository.findByUserNameAndPassword(username, password);
@@ -41,7 +41,6 @@ public class LoginController {
 
     @RequestMapping(value = "/getLoginInfo", method = RequestMethod.GET)
     public
-    @ResponseBody
     User getLoginInfo(HttpSession session) {
         return (User) session.getAttribute("userInfo");
     }

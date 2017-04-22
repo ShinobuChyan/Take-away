@@ -1,4 +1,4 @@
-$.get('ogin/getLoginInfo', (res) => {
+$.get('login/getLoginInfo', (res) => {
     if (res === null) { // 未登陆
         $('#noLogin').css("display", "block");
     } else { // 已登录
