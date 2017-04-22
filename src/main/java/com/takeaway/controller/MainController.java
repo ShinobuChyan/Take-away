@@ -28,14 +28,14 @@ public class MainController {
             return "userMain";
 
         // TODO 中文搜索
-
+        return null;
     }
 
     @RequestMapping(value = "/courseSearch", method = RequestMethod.POST)
     public
     @ResponseBody
-    PageResponse mainCourseSearch(Integer page, Integer size) {
-        return pageService.courseSearch(page, size);
+    PageResponse mainCourseSearch(Integer page, Integer size, Integer type) {
+        return pageService.courseSearch(page, size, type);
     }
 
 }
