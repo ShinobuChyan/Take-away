@@ -47,7 +47,7 @@ $('#registerName').blur(function() {
     $(this).next('.err-tips').text('');
     let registerName = $(this).val();
     if (namereg.test(registerName)) {
-        $.post('register/verify', { userName: registerName }, (res) => {
+        $.get('register/verify', { userName: registerName }, (res) => {
             if (res.code === '1') {
                 $(this).next('.err-tips').text('用户名已存在');
                 return false;
@@ -109,6 +109,24 @@ $('#register-submit').click(function() {
             $('.close').click();
         }
     });
+});
+// 验证登陆用户名是否正确
+$('#loginName').blur(function() {
+    $(this).next('.err-tips').text('');
+    let loginName = $(this).val();
+    if (!namereg.test(loginName)) {
+        $(this).next('.err-tips').text('用户名为3-15个字母数字下划线的组合');
+        return false;
+    }
+});
+// 验证登陆密码是否正确
+$('#loginPwd').blur(function() {
+    $(this).next('.err-tips').text('');
+    let loginPwd = $(this).val();
+    if (!pwdreg.test(loginPwd)) {
+        $(this).next('.err-tips').text('密码为6-15个字母数字下划线的组合');
+        return false;
+    }
 });
 $('#login-submit').click(function() {
     var name = $('#loginName').val();
