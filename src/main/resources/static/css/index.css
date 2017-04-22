@@ -24,6 +24,10 @@ body {
     padding-right: 150px;
 }
 
+.menu .login-item {
+    display: none;
+}
+
 .menu span {
     cursor: pointer;
     display: inline-block;
