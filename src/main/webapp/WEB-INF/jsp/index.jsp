@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -27,19 +28,15 @@
     <span class="subtitle">登陆</span>
     <span class="glyphicon glyphicon-remove close" aria-hidden="true"></span>
     <div class="input-margin">
-
-        <form action="login" method="post">
-            <div class="input-group">
-                <span class="input-group-addon">账号:</span>
-                <input type="text" class="form-control" id="loginName" name="username" placeholder="请输入账号" aria-describedby="basic-addon3">
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon">密码:</span>
-                <input type="password" class="form-control" id="loginPwd" name="password" placeholder="请输入密码" aria-describedby="basic-addon3">
-            </div>
-            <button type="button" id="login-submit" class="btn btn-default btn-submit">登陆</button>
-        </form>
-
+        <div class="input-group">
+            <span class="input-group-addon">账号:</span>
+            <input type="text" class="form-control" id="loginName" name="username" placeholder="请输入账号" aria-describedby="basic-addon3">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">密码:</span>
+            <input type="password" class="form-control" id="loginPwd" name="password" placeholder="请输入密码" aria-describedby="basic-addon3">
+        </div>
+        <button type="button" id="login-submit" class="btn btn-default btn-submit">登陆</button>
     </div>
 </div>
 <div class="dlg register-margin">
@@ -50,14 +47,18 @@
             <div class="input-group">
                 <span class="input-group-addon">账号:</span>
                 <input type="text" class="form-control" id="registerName" placeholder="请输入账号" aria-describedby="basic-addon3">
+                <p class="err-tips"></p>
             </div>
+
             <div class="input-group">
                 <span class="input-group-addon">密码:</span>
                 <input type="password" class="form-control" id="registerPwd" placeholder="请输入密码" aria-describedby="basic-addon3">
+                <p class="err-tips"></p>
             </div>
             <div class="input-group">
                 <span class="input-group-addon">确认密码:</span>
                 <input type="password" class="form-control" id="registerPwd2" placeholder="请再次输入密码" aria-describedby="basic-addon3">
+                <p class="err-tips"></p>
             </div>
             <button type="button" id="register-submit" class="btn btn-default btn-submit">注册</button>
         </form>
