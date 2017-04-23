@@ -20,6 +20,8 @@ public class Course {
 
     private Long volume;
 
+    private String remark;
+
     public Long getId() {
         return id;
     }
@@ -66,5 +68,13 @@ public class Course {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

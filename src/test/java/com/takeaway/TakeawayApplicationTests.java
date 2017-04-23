@@ -1,6 +1,7 @@
 package com.takeaway;
 
 import com.takeaway.model.course.Course;
+import com.takeaway.model.menu.Menu;
 import com.takeaway.repository.course.CourseRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -22,10 +24,7 @@ public class TakeawayApplicationTests {
 	@Test
 	public void contextLoads() {
 
-        Page<Course> page = courseRepository.findAll(new PageRequest(1, 2));
-        List<Course> list = page.getContent();
-        Long a = page.getTotalElements();
-        Integer b = page.getTotalPages();
+        Page<Course> pages = courseRepository.findAll(new PageRequest(0, 20));
 
     }
 
