@@ -7,23 +7,13 @@ var menuList = [{
     price: 1200,
     volume: 12,
     num: 0
-},{
-    id: 1,
-    name:'鱼香肉丝',
-    img: 'img/001.jpg',
-    type: 1,
-    price: 1200,
-    volume: 12,
-    num: 0
-},{
-    id: 1,
-    name:'鱼香肉丝',
-    img: 'img/001.jpg',
-    type: 1,
-    price: 1200,
-    volume: 12,
-    num: 0
 }];
+
+var typeMap = {
+    '0':'荤菜',
+    '1':'素菜',
+    '2':'汤'
+};
 
 function getUrlParam(name) {
     //创建一个查找参数的正则表达式对象
@@ -71,9 +61,27 @@ Vue.filter('money', function (num) {
 });
 
 var vm = new Vue({
-    el: '#content',
+    el: '#app',
     data: {
-        list: menuList
+        currentPage: 1,
+        pageCount: 1,
+        list: [],
+        typeMap,
+        typeLIst: []
+    },
+    mounted(){
+        $.get('main/getMenu',(res)=> {
+          this.typeLIst = res;
+        });
+        $.post('main/courseSearch', {page: this.currentPage},(res)=> {
+            this.pageCount = res.totalPages;
+            var newList = [];
+            res.content.map((item)=> {
+                var newItem = Object.assign({},item,{num:0});
+                newList.push(newItem);
+            });
+            this.list = newList;
+        });
     },
     methods:{
 
