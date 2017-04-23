@@ -101,3 +101,9 @@ body {
     border-color: #f0ad4e;
     border-width: 2px;
 }
+
+#page-margin {
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+}
