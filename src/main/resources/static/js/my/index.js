@@ -40,5 +40,5 @@ $('#search-input').keydown(function(event) {
 function search(searchStr) {
     // do something...
     console.log('搜索');
-    document.location.href = 'main.html?search=' + searchStr;
+    // TODO 搜索
 }
