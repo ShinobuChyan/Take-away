@@ -33,17 +33,17 @@ public class PageServiceImpl implements PageService {
     @Override
     public PageResponse courseSearch(Integer page, Integer type) {
 
-//        Specification<Course> condition = (root, query, cb) -> {
-//
-//            List<Predicate> predicates = new ArrayList<>();
-//
-//            if (type != null)
-//                predicates.add(cb.equal(root.get("type"), type));
-//
-//            return cb.and(predicates.toArray(new Predicate[predicates.size()]));
-//        };
+        Specification<Course> condition = (root, query, cb) -> {
 
-        Page<Course> pages = courseRepository.findAll(/*condition,*/ new PageRequest(page - 1, 20));
+            List<Predicate> predicates = new ArrayList<>();
+
+            if (type != null)
+                predicates.add(cb.equal(root.get("type"), type));
+
+            return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+        };
+
+        Page<Course> pages = courseRepository.findAll(condition, new PageRequest(page - 1, 20));
 
         return PageUtil.getPageResponse(pages);
     }

@@ -39,9 +39,14 @@ public class LoginController {
         return new CommonResponse("0", "登陆成功");
     }
 
+    @RequestMapping(value = "/logOut", method = RequestMethod.GET)
+    public CommonResponse logOut(HttpSession session) {
+        session.invalidate();
+        return new CommonResponse("0", "注销成功");
+    }
+
     @RequestMapping(value = "/getLoginInfo", method = RequestMethod.GET)
-    public
-    User getLoginInfo(HttpSession session) {
+    public User getLoginInfo(HttpSession session) {
         return (User) session.getAttribute("userInfo");
     }
 

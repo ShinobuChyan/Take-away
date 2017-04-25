@@ -2,7 +2,9 @@ package com.takeaway;
 
 import com.takeaway.model.course.Course;
 import com.takeaway.model.menu.Menu;
+import com.takeaway.model.page.PageResponse;
 import com.takeaway.repository.course.CourseRepository;
+import com.takeaway.service.page.PageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,11 @@ public class TakeawayApplicationTests {
     @Autowired
     CourseRepository courseRepository;
 
+    @Autowired
+    PageService pageService;
+
 	@Test
 	public void contextLoads() {
-
-        Page<Course> pages = courseRepository.findAll(new PageRequest(0, 20));
 
     }
 
