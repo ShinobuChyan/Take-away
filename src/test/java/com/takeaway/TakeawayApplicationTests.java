@@ -1,5 +1,6 @@
 package com.takeaway;
 
+import com.takeaway.model.Order;
 import com.takeaway.model.course.Course;
 import com.takeaway.model.menu.Menu;
 import com.takeaway.model.page.PageResponse;
