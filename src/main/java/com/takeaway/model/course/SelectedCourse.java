@@ -5,16 +5,17 @@ import java.util.Map;
 
 public class SelectedCourse {
 
-    private Long courseId;
+    private Course course;
 
     private Integer count;
 
-    public Long getCourseId() {
-        return courseId;
+    public SelectedCourse() {
+
     }
 
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
+    public SelectedCourse(Course course, Integer count) {
+        this.count = count;
+        this.course = course;
     }
 
     public Integer getCount() {
@@ -23,5 +24,13 @@ public class SelectedCourse {
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

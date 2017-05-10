@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface CourseRepository extends JpaRepository<Course, Long>, JpaSpecificationExecutor {
+public interface CourseRepo extends JpaRepository<Course, Long>, JpaSpecificationExecutor {
 
     Page<Course> findAll(Pageable pageable);
 

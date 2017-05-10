@@ -2,7 +2,7 @@ package com.takeaway.controller;
 
 import com.takeaway.model.menu.Menu;
 import com.takeaway.model.page.PageResponse;
-import com.takeaway.repository.course.CourseRepository;
+import com.takeaway.repository.course.CourseRepo;
 import com.takeaway.service.page.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,12 +18,12 @@ public class MainController {
 
     private PageService pageService;
 
-    private CourseRepository courseRepository;
+    private CourseRepo courseRepository;
 
     @Autowired
     public MainController(
             PageService pageService,
-            CourseRepository courseRepository
+            CourseRepo courseRepository
     ) {
         this.pageService = pageService;
         this.courseRepository = courseRepository;

@@ -3,7 +3,7 @@ package com.takeaway.service.page.impl;
 import com.takeaway.model.order.Order;
 import com.takeaway.model.course.Course;
 import com.takeaway.model.page.PageResponse;
-import com.takeaway.repository.course.CourseRepository;
+import com.takeaway.repository.course.CourseRepo;
 import com.takeaway.repository.order.OrderRepo;
 import com.takeaway.service.page.PageService;
 import com.takeaway.util.PageUtil;
@@ -20,13 +20,13 @@ import java.util.List;
 @Service
 public class PageServiceImpl implements PageService {
 
-    private CourseRepository courseRepository;
+    private CourseRepo courseRepository;
 
     private OrderRepo orderRepo;
 
     @Autowired
     public PageServiceImpl(
-            CourseRepository courseRepository,
+            CourseRepo courseRepository,
             OrderRepo orderRepo) {
         this.courseRepository = courseRepository;
         this.orderRepo = orderRepo;
@@ -54,6 +54,9 @@ public class PageServiceImpl implements PageService {
     public PageResponse orderList(Integer page, Long userId) {
 
         Page<Order> pages = orderRepo.findByUserId(new PageRequest(page - 1, 20), userId);
+        PageResponse resp = PageUtil.getPageResponse(pages);
+        List<Order> cont = resp.getContent();
+        cont.forEach(Order::coursesStrToCourses);
 
         return PageUtil.getPageResponse(pages);
     }

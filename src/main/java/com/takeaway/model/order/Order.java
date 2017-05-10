@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -32,11 +32,13 @@ public class Order {
     @Column(name = "paymethod")
     private Integer payMethod;
 
-    public List<SelectedCourse> getCourses() {
-        return JSON.parseArray(this.coursesString, SelectedCourse.class);
+    private transient List<SelectedCourse> courses;
+
+    public void coursesStrToCourses() {
+        this.courses = JSON.parseArray(this.coursesString, SelectedCourse.class);
     }
 
-    public void setCourses(List<SelectedCourse> courses) {
+    public void coursesToCoursesStr(List<SelectedCourse> courses) {
         this.coursesString = JSON.toJSONString(courses);
     }
 
@@ -94,5 +96,13 @@ public class Order {
 
     public void setCoursesString(String coursesString) {
         this.coursesString = coursesString;
+    }
+
+    public List<SelectedCourse> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<SelectedCourse> courses) {
+        this.courses = courses;
     }
 }
