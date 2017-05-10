@@ -1,12 +1,11 @@
 package com.takeaway.controller;
 
 import com.takeaway.model.response.CommonResponse;
-import com.takeaway.repository.user.UserRepository;
+import com.takeaway.repository.user.UserRepo;
 import com.takeaway.service.register.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -19,12 +18,12 @@ public class RegisterController {
     RegisterService registerService;
 
     private
-    UserRepository userRepository;
+    UserRepo userRepository;
 
     @Autowired
     public RegisterController(
             RegisterService registerService,
-            UserRepository userRepository
+            UserRepo userRepository
     ) {
         this.registerService = registerService;
         this.userRepository = userRepository;

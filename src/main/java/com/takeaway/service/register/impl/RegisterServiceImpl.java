@@ -1,7 +1,7 @@
 package com.takeaway.service.register.impl;
 
 import com.takeaway.model.user.User;
-import com.takeaway.repository.user.UserRepository;
+import com.takeaway.repository.user.UserRepo;
 import com.takeaway.service.register.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,10 @@ import javax.servlet.http.HttpSession;
 public class RegisterServiceImpl implements RegisterService {
 
     private final
-    UserRepository userRepository;
+    UserRepo userRepository;
 
     @Autowired
-    public RegisterServiceImpl(UserRepository userRepository) {
+    public RegisterServiceImpl(UserRepo userRepository) {
         this.userRepository = userRepository;
     }
 

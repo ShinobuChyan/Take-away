@@ -1,4 +1,4 @@
-package com.takeaway.model;
+package com.takeaway.model.order;
 
 import com.alibaba.fastjson.JSON;
 import com.takeaway.model.course.SelectedCourse;

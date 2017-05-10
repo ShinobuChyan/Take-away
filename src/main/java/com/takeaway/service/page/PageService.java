@@ -7,4 +7,6 @@ public interface PageService {
 
     PageResponse courseSearch(Integer page, Integer type);
 
+    PageResponse orderList(Integer page, Long userId);
+
 }
