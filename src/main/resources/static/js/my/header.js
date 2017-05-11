@@ -1,3 +1,6 @@
+// 存贮用户信息
+var user = {};
+
 $.get('login/getLoginInfo', (res) => {
     console.log(res);
     if (!res) { // 未登陆
