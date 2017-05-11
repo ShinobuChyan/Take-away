@@ -2,6 +2,7 @@ package com.takeaway.controller;
 
 import com.takeaway.model.page.PageResponse;
 import com.takeaway.model.response.CommonResponse;
+import com.takeaway.model.user.Address;
 import com.takeaway.model.user.User;
 import com.takeaway.service.myCenter.MyCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/myCenter")
@@ -39,8 +41,7 @@ public class MyCenterController {
 
     @RequestMapping(value = "/changePwd", method = RequestMethod.POST)
     public CommonResponse changePwd(String oldPwd, String newPwd, HttpSession session) {
-        User user = (User) session.getAttribute("userInfo");
-        return myCenterService.changePwd(user, oldPwd, newPwd);
+        return myCenterService.changePwd((User) session.getAttribute("userInfo"), oldPwd, newPwd);
     }
 
     @RequestMapping(value = "/order", method = RequestMethod.GET)
@@ -60,6 +61,21 @@ public class MyCenterController {
     @RequestMapping(value = "/address", method = RequestMethod.GET)
     public String toAddress() {
         return "myCenterAddress";
+    }
+
+    @RequestMapping(value = "/getAddressList", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Address> getAddressList(HttpSession session) {
+        User user = (User) session.getAttribute("userInfo");
+        return user.getAddressList();
+    }
+
+    @RequestMapping
+    public
+    @ResponseBody
+    CommonResponse saveAddressChanges(Address address) {
+        return myCenterService.saveAddressChanges(address);
     }
 
 }

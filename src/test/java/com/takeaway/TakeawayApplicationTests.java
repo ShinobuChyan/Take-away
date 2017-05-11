@@ -4,8 +4,11 @@ import com.takeaway.model.course.Course;
 import com.takeaway.model.course.SelectedCourse;
 import com.takeaway.model.order.Order;
 import com.takeaway.model.page.PageResponse;
+import com.takeaway.model.user.Address;
+import com.takeaway.model.user.User;
 import com.takeaway.repository.course.CourseRepo;
 import com.takeaway.repository.order.OrderRepo;
+import com.takeaway.repository.user.UserRepo;
 import com.takeaway.service.page.PageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,9 +34,15 @@ public class TakeawayApplicationTests {
     @Autowired
     OrderRepo orderRepo;
 
+    @Autowired
+    UserRepo userRepo;
+
 
 	@Test
 	public void contextLoads() {
+
+        User user = userRepo.findByUserNameAndPassword("user", "123456");
+        List<Address> addresses = user.getAddressList();
 
     }
 

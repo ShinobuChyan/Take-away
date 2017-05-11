@@ -33,7 +33,7 @@ public class PageServiceImpl implements PageService {
     }
 
     @Override
-    public PageResponse courseSearch(Integer page, Integer type) {
+    public PageResponse courseSearch(Integer page, Integer type, String courseName) {
 
         Specification<Course> condition = (root, query, cb) -> {
 
@@ -41,6 +41,8 @@ public class PageServiceImpl implements PageService {
 
             if (type != null)
                 predicates.add(cb.equal(root.get("type"), type));
+            if (courseName != null && !"".equals(courseName))
+                predicates.add(cb.equal(root.get("name"), courseName));
 
             return cb.and(predicates.toArray(new Predicate[predicates.size()]));
         };

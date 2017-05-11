@@ -1,6 +1,7 @@
 package com.takeaway.model.user;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -21,6 +22,9 @@ public class User {
     private Integer type;        //用户类型 0 普通用户, 1 管理员
 
     //地址
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userid")
+    private List<Address> addressList;
 
     public Long getUserId() {
         return userId;
@@ -52,5 +56,13 @@ public class User {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public List<Address> getAddressList() {
+        return addressList;
+    }
+
+    public void setAddressList(List<Address> addressList) {
+        this.addressList = addressList;
     }
 }

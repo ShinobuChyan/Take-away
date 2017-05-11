@@ -30,20 +30,15 @@ public class MainController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String userMain(String searchContent) {
-
-        if (searchContent == null || "".equals(searchContent))
-            return "main";
-
-        // TODO 中文搜索
+    public String userMain() {
         return "main";
     }
 
     @RequestMapping(value = "/courseSearch", method = RequestMethod.POST)
     public
     @ResponseBody
-    PageResponse mainCourseSearch(Integer page, Integer type) {
-        return pageService.courseSearch(page, type);
+    PageResponse mainCourseSearch(Integer page, Integer type, String courseName) {
+        return pageService.courseSearch(page, type, courseName);
     }
 
     @RequestMapping(value = "/getMenu", method = RequestMethod.GET)

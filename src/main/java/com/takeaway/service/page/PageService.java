@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 public interface PageService {
 
-    PageResponse courseSearch(Integer page, Integer type);
+    PageResponse courseSearch(Integer page, Integer type, String courseName);
 
     PageResponse orderList(Integer page, Long userId);
 
