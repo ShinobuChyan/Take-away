@@ -15,14 +15,14 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/myCenter")
-public class MyCenterController {
+@RequestMapping(value = "/userCenter")
+public class UserCenterController {
 
     private final
     MyCenterService myCenterService;
 
     @Autowired
-    public MyCenterController(MyCenterService myCenterService) {
+    public UserCenterController(MyCenterService myCenterService) {
         this.myCenterService = myCenterService;
     }
 
@@ -31,7 +31,7 @@ public class MyCenterController {
         if (session.getAttribute("userInfo") == null)
             return "redirect:/index";
 
-        return "myCenter";
+        return "userCenter";
     }
 
     @RequestMapping(value = "/changeInfo", method = RequestMethod.GET)
@@ -40,7 +40,9 @@ public class MyCenterController {
     }
 
     @RequestMapping(value = "/changePwd", method = RequestMethod.POST)
-    public CommonResponse changePwd(String oldPwd, String newPwd, HttpSession session) {
+    public
+    @ResponseBody
+    CommonResponse changePwd(String oldPwd, String newPwd, HttpSession session) {
         return myCenterService.changePwd((User) session.getAttribute("userInfo"), oldPwd, newPwd);
     }
 
@@ -71,7 +73,7 @@ public class MyCenterController {
         return user.getAddressList();
     }
 
-    @RequestMapping
+    @RequestMapping(value = "/changeAddress", method = RequestMethod.POST)
     public
     @ResponseBody
     CommonResponse saveAddressChanges(Address address) {

@@ -29,7 +29,7 @@ public class LoginController {
 
         // 若未找到对应用户则返回-1
         if (user == null)
-            return new CommonResponse("-1", "登陆失败");
+            return new CommonResponse("-1", "登陆失败，用户名或密码错误");
 
         // 保存用户登陆信息
         session.setAttribute("userInfo", user);
