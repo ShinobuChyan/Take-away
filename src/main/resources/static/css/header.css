@@ -10,7 +10,10 @@
     padding-right: 150px;
     z-index: 2;
 }
-
+.menu #index {
+    position: absolute;
+    left: 200px;
+}
 .menu .login-item {
     display: none;
 }
@@ -27,7 +30,7 @@
 }
 
 .menu span:hover {
-    color: #ffd161;
+    color: #222;
 }
 
 .menu .line {

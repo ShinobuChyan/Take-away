@@ -13,6 +13,7 @@
     <body>
         <header>
             <div class="menu">
+                <span id="index">O2O外卖系统</span>
                 <div class="login-item" id="noLogin">
                     <span id="login">登陆</span>
                     <span class="line"></span>
