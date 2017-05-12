@@ -6,9 +6,15 @@ $.get('login/getLoginInfo', (res) => {
     if (!res) { // 未登陆
         $('#noLogin').css("display", "block");
     } else { // 已登录
+        user = res;
         $('#userName').text(res.userName);
         $('#userMsg').css("display", "block");
     }
+});
+
+// 点击回到主页按钮
+$('#index').click(function () {
+    window.location.href = 'index';
 });
 
 // 登陆注册按钮点击事件
@@ -96,7 +102,7 @@ $('#register-submit').click(function() {
     $('.err-tips').text('');
     // do register ...
     $.post('register', { userName: name, password: pwd }, (res) => {
-        if (res.code === '1') {
+        if (res.code !== '0') {
             alert(res.msg);
             return false;
         } else if (res.code === '0') {
@@ -137,7 +143,7 @@ $('#login-submit').click(function() {
     }
     // do login ...
     $.post('login', { userName: name, password: pwd }, (res) => {
-        if (res.code === '1') {
+        if (res.code !== '0') {
             alert(res.msg);
             return false;
         } else if (res.code === '0') {
@@ -154,4 +160,16 @@ $('.close').click(function() {
     setTimeout(() => {
         $(this).parent('.dlg').removeClass('show');
     }, 740);
+});
+
+// 注销事件
+$('#cancellation').click(function() {
+    $.get('login/logOut',function () {
+        window.location.reload();
+    })
+});
+
+// 前往个人中心
+$('#userName').click(function () {
+    window.location.href = 'userCenter';
 });

@@ -1,7 +1,6 @@
-
 var menuList = [{
     id: 1,
-    name:'鱼香肉丝',
+    name: '鱼香肉丝',
     img: 'img/001.jpg',
     type: 1,
     price: 1200,
@@ -10,9 +9,9 @@ var menuList = [{
 }];
 
 var typeMap = {
-    '0':'荤菜',
-    '1':'素菜',
-    '2':'汤'
+    '0': '荤菜',
+    '1': '素菜',
+    '2': '汤'
 };
 
 function getUrlParam(name) {
@@ -31,13 +30,13 @@ $('#search-input').val(searchStr);
 search(searchStr);
 
 // 触发搜索事件
-$('#search-input').click(function() {
+$('#search-input').click(function () {
     if ($('#search-input').val() === '') {
         return;
     }
     search($('#search-input').val());
 });
-$('#search-btn').keydown(function(event) {
+$('#search-btn').keydown(function (event) {
     if ($('#search-input').val() === '') {
         return;
     }
@@ -57,7 +56,7 @@ function search(searchStr) {
 }
 
 Vue.filter('money', function (num) {
-    return '￥'+(num / 100).toFixed(2);
+    return '￥' + (num / 100).toFixed(2);
 });
 
 var vm = new Vue({
@@ -70,20 +69,24 @@ var vm = new Vue({
         typeLIst: []
     },
     mounted(){
-        $.get('main/getMenu',(res)=> {
-          this.typeLIst = res;
+        $.get('main/getMenu', (res) => {
+            this.typeLIst = res;
         });
-        $.post('main/courseSearch', {page: this.currentPage},(res)=> {
+        $.post('main/courseSearch', {page: this.currentPage}, (res) => {
             this.pageCount = res.totalPages;
             var newList = [];
-            res.content.map((item)=> {
-                var newItem = Object.assign({},item,{num:0});
+            res.content.map((item) => {
+                var newItem = Object.assign({}, item, {num: 0});
                 newList.push(newItem);
             });
             this.list = newList;
         });
     },
-    methods:{
-
+    computed: {
+        selectedList() {
+            return this.list.filter(item => {
+                return item.num > 0;
+            });
+        }
     }
 });

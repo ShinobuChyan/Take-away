@@ -34,7 +34,9 @@ body {
     box-sizing: border-box;
     z-index: 1;
 }
-
+#content .row {
+    margin-top: 20px;
+}
 #content .left-margin {
     margin: 10px 0px 0px 95px;
 }
@@ -106,4 +108,33 @@ body {
     width: 100%;
     text-align: center;
     padding-top: 10px;
+}
+#cart-margin {
+    box-sizing: border-box;
+    border:1px solid #f0ad4e;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 100px;
+    text-align: center;
+}
+.subTitle {
+    display: block;
+    font-size: 26px;
+    line-height: 30px;
+    color: #f0ad4e;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#cart-margin .cart {
+    text-align: left;
+    margin: 2px 0px;
+}
+
+#cart-margin .cart .courseName {
+    float: right;
+}
+#cart-margin .commit {
+    margin-top: 10px;
 }
