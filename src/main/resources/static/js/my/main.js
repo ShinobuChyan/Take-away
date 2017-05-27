@@ -63,7 +63,7 @@ var vm = new Vue({
                 }
             });
 
-            $.post('main/submit', orderList, (res) => {
+            $.post('main/submit', { newOrder: orderList }, (res) => {
                 console.log('提交订单返回：', res);
             });
         },
