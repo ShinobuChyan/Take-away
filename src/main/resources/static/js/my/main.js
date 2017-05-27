@@ -52,7 +52,7 @@ var vm = new Vue({
             });
         }
     },
-    mounted: {
+    methods: {
         commitList() {
 
         },
