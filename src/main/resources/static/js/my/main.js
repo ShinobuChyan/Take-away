@@ -52,7 +52,19 @@ $('#search-btn').keydown(function (event) {
 // 搜索的函数
 function search(searchStr) {
     // do something...
-    console.log('搜索');
+    console.log('搜索', searchStr);
+    $.post('main/courseSearch', { 
+        page: this.currentPage,
+        courseSearch: searchStr
+    }, (res) => {
+        this.pageCount = res.totalPages;
+        var newList = [];
+        res.content.map((item) => {
+            var newItem = Object.assign({}, item, { num: 0 });
+            newList.push(newItem);
+        });
+        this.list = newList;
+    });
 }
 
 Vue.filter('money', function (num) {
@@ -68,15 +80,15 @@ var vm = new Vue({
         typeMap,
         typeLIst: []
     },
-    mounted(){
+    mounted() {
         $.get('main/getMenu', (res) => {
             this.typeLIst = res;
         });
-        $.post('main/courseSearch', {page: this.currentPage}, (res) => {
+        $.post('main/courseSearch', { page: this.currentPage }, (res) => {
             this.pageCount = res.totalPages;
             var newList = [];
             res.content.map((item) => {
-                var newItem = Object.assign({}, item, {num: 0});
+                var newItem = Object.assign({}, item, { num: 0 });
                 newList.push(newItem);
             });
             this.list = newList;

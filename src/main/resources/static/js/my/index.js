@@ -2,7 +2,7 @@
 function random_move() {
     $.magicCanvas.draw({
         type: "random-move",
-        rgb: function(circlePos) {
+        rgb: function (circlePos) {
             var px = circlePos.x;
             var py = circlePos.y;
             // do some computation....
@@ -17,13 +17,13 @@ function random_move() {
 random_move();
 
 // 触发搜索事件
-$('#search-btn').click(function() {
+$('#search-btn').click(function () {
     if ($('#search-input').val() === '') {
         return;
     }
     search($('#search-input').val());
 });
-$('#search-input').keydown(function(event) {
+$('#search-input').keydown(function (event) {
     if ($('#search-input').val() === '') {
         return;
     }
@@ -39,6 +39,7 @@ $('#search-input').keydown(function(event) {
 // 搜索的函数
 function search(searchStr) {
     // do something...
-    console.log('搜索');
+    console.log('搜索', searchStr);
     // TODO 搜索
+    window.location.href = "./main?search=" + searchStr;
 }
