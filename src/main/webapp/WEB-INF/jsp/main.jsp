@@ -17,8 +17,8 @@
     <div class="search-menu">
         <div class="search-margin">
             <div class="input-group">
-                <input type="text" id="search-input" class="form-control" placeholder="请搜索美食">
-                <span class="input-group-addon" id="search-btn"><span class="glyphicon glyphicon-search"
+                <input type="text" id="search-input" class="form-control" v-model="searchstr" placeholder="请搜索美食" @keyup.enter="search">
+                <span class="input-group-addon" id="search-btn" @click="search"><span class="glyphicon glyphicon-search"
                                                                       aria-hidden="true"></span></span>
             </div>
         </div>
@@ -57,7 +57,7 @@
                         <span class="courseCount">/{{courseItem.price|money}}</span>
                         <span class="courseName">&emsp;× {{courseItem.num}}</span>
                     </div>
-                    <el-button class="commit">提交</el-button>
+                    <el-button class="commit" @click="commitList">提交</el-button>
                 </div>
             </div>
         </div>

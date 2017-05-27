@@ -24,48 +24,6 @@ function getUrlParam(name) {
 }
 
 var searchStr = getUrlParam('search');
-console.log(searchStr);
-
-$('#search-input').val(searchStr);
-search(searchStr);
-
-// 触发搜索事件
-$('#search-input').click(function () {
-    if ($('#search-input').val() === '') {
-        return;
-    }
-    search($('#search-input').val());
-});
-$('#search-btn').keydown(function (event) {
-    if ($('#search-input').val() === '') {
-        return;
-    }
-    switch (event.keyCode) {
-        case 13:
-            search($('#search-input').val());
-            break;
-        default:
-            break;
-    }
-});
-
-// 搜索的函数
-function search(searchStr) {
-    // do something...
-    console.log('搜索', searchStr);
-    $.post('main/courseSearch', { 
-        page: this.currentPage,
-        courseSearch: searchStr
-    }, (res) => {
-        this.pageCount = res.totalPages;
-        var newList = [];
-        res.content.map((item) => {
-            var newItem = Object.assign({}, item, { num: 0 });
-            newList.push(newItem);
-        });
-        this.list = newList;
-    });
-}
 
 Vue.filter('money', function (num) {
     return '￥' + (num / 100).toFixed(2);
@@ -78,26 +36,39 @@ var vm = new Vue({
         pageCount: 1,
         list: [],
         typeMap,
-        typeLIst: []
+        typeLIst: [],
+        searchstr: searchStr
     },
     mounted() {
         $.get('main/getMenu', (res) => {
             this.typeLIst = res;
         });
-        $.post('main/courseSearch', { page: this.currentPage }, (res) => {
-            this.pageCount = res.totalPages;
-            var newList = [];
-            res.content.map((item) => {
-                var newItem = Object.assign({}, item, { num: 0 });
-                newList.push(newItem);
-            });
-            this.list = newList;
-        });
+        this.search();
     },
     computed: {
         selectedList() {
             return this.list.filter(item => {
                 return item.num > 0;
+            });
+        }
+    },
+    mounted: {
+        commitList() {
+
+        },
+        search() {
+            console.log('搜索', this.searchstr);
+            $.post('main/courseSearch', {
+                page: this.currentPage,
+                courseSearch: this.searchstr
+            }, (res) => {
+                this.pageCount = res.totalPages;
+                var newList = [];
+                res.content.map((item) => {
+                    var newItem = Object.assign({}, item, { num: 0 });
+                    newList.push(newItem);
+                });
+                this.list = newList;
             });
         }
     }
