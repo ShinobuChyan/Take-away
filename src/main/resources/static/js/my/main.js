@@ -54,7 +54,18 @@ var vm = new Vue({
     },
     methods: {
         commitList() {
+            let orderList = this.list.filter(item => {
+                return item.num > 0;
+            }).map(item => {
+                return {
+                    id: item.id,
+                    count: item.num
+                }
+            });
 
+            $.post('main/submit', orderList, (res) => {
+                console.log('提交订单返回：', res);
+            });
         },
         search() {
             console.log('搜索', this.searchstr);
