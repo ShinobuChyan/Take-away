@@ -60,7 +60,7 @@ var vm = new Vue({
             console.log('搜索', this.searchstr);
             $.post('main/courseSearch', {
                 page: this.currentPage,
-                courseSearch: this.searchstr
+                courseName: this.searchstr
             }, (res) => {
                 this.pageCount = res.totalPages;
                 var newList = [];
