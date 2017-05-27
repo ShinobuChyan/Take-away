@@ -59,13 +59,19 @@ Vue.component('change-password', {
         },
         changePass() {
             if (this.tips1 == this.tips2 == this.tips3 == '') {
-                $.post('userCenter/changePwd', {oldPwd: this.oldPass, newPwd: this.pwd2}, (res) => {
+                $.post('userCenter/changePwd', { oldPwd: this.oldPass, newPwd: this.pwd2 }, (res) => {
                     if (res.code === '1') {
-                        alert(res.msg);
+                        this.$message({
+                            showClose: true,
+                            message: res.msg
+                        });
                         return false;
                     } else if (res.code === '0') {
                         // 修改密码成功
-                        alert(res.msg);
+                        this.$message({
+                            showClose: true,
+                            message: res.msg
+                        });
                         this.oldPass = this.pwd1 = this.pwd2 = '';
                     }
                 });
@@ -188,7 +194,10 @@ Vue.component('change-address', {
                     address: this.phoneNum,
                     phone: this.address
                 }, (res) => {
-                    alert('地址添加或修改成功');
+                    this.$message({
+                        showClose: true,
+                        message: '地址添加或修改成功'
+                    });
                     this.personName = this.phoneNum = this.address = '';
                 });
             }
@@ -255,15 +264,15 @@ Vue.component('order-list', {
             currentPage: 1
         }
     },
-    mounted(){
+    mounted() {
         this.init();
     },
     methods: {
         init() {
-            $.get('userCenter/orderList',{page:this.currentPage}, (res) => {
+            $.get('userCenter/orderList', { page: this.currentPage }, (res) => {
                 console.log('orderList', res);
                 this.pageCount = res.totalPages;
-                this.listData = res.content.map(item=> {
+                this.listData = res.content.map(item => {
                     return {
                         orderNo: item.orderNo,
                         createTime: item.createTime,

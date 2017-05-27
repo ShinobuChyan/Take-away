@@ -65,6 +65,22 @@ var vm = new Vue({
 
             $.post('main/submit', { newOrder: orderList }, (res) => {
                 console.log('提交订单返回：', res);
+                if (res.code === '1') {
+                    this.$message({
+                        showClose: true,
+                        message: res.msg
+                    });
+                    return false;
+                } else if (res.code === '0') {
+                    // 修改密码成功
+                    this.$message({
+                        showClose: true,
+                        message: res.msg
+                    });
+                    this.list.forEach(item => {
+                        item.num = 0;
+                    });
+                }
             });
         },
         search() {
