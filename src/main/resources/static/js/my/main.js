@@ -40,7 +40,8 @@ var vm = new Vue({
         searchstr: searchStr,
         dialogTableVisible: false,
         address: '',
-        addList: []
+        addList: [],
+        orderList: []
     },
     mounted() {
         $.get('main/getMenu', (res) => {
@@ -62,7 +63,7 @@ var vm = new Vue({
     },
     methods: {
         commitList() {
-            let orderList = this.list.filter(item => {
+            this.orderList = this.list.filter(item => {
                 return item.num > 0;
             }).map(item => {
                 return {
@@ -83,7 +84,7 @@ var vm = new Vue({
                 });
             }
             $.post('main/submit', {
-                newOrder: orderList,
+                newOrder: this.orderList,
                 addressId: this.address
             }, (res) => {
                 console.log('提交订单返回：', res);

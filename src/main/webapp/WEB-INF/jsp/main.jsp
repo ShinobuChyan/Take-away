@@ -69,7 +69,7 @@
                 </el-radio-group>
             </el-dialog>
 
-            <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
+            <el-dialog title="收货地址" :visible="dialogTableVisible" :show-close="false">
                 <el-radio-group v-model="address">
                     <el-radio :label="add.id" :key="add.id" v-for="add in addList">地址：{{add.address}} 收货人：{{add.name}}手机号:{{add.phone}}</el-radio><br>
                 </el-radio-group>
