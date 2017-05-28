@@ -72,7 +72,9 @@ var vm = new Vue({
             });
 
             this.dialogTableVisible = true;
-
+        },
+        commit() {
+            console.log(this.address);
             // $.post('main/submit', { newOrder: orderList }, (res) => {
             //     console.log('提交订单返回：', res);
             //     if (res.code === '1') {

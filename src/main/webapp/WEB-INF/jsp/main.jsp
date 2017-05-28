@@ -58,15 +58,26 @@
                                 <span class="courseName">&emsp;× {{courseItem.num}}</span>
                             </div>
                             <el-button class="commit" @click="commitList">提交</el-button>
-                            <el-dialog title="选择收货地址" :visible.sync="dialogTableVisible">
-                                <el-radio-group v-model="address">
-                                    <el-radio :label="add.id" :key="add.id" v-for="add in addList">地址：{{add.address}} 收货人：{{add.name}}{{add.phone}}</el-radio>
-                                </el-radio-group>
-                            </el-dialog>
+
                         </div>
                     </div>
                 </div>
             </div>
+            <el-dialog title="选择收货地址" :visible.sync="dialogTableVisible">
+                <el-radio-group v-model="address">
+                    <el-radio :label="add.id" :key="add.id" v-for="add in addList">地址：{{add.address}} 收货人：{{add.name}}{{add.phone}}</el-radio>
+                </el-radio-group>
+            </el-dialog>
+
+            <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
+                <el-radio-group v-model="address">
+                    <el-radio :label="add.id" :key="add.id" v-for="add in addList">地址：{{add.address}} 收货人：{{add.name}}{{add.phone}}</el-radio>
+                </el-radio-group>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogTableVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="commit">确 定</el-button>
+                </div>
+            </el-dialog>
         </div>
         <script src="js/jquery-3.1.0.js"></script>
         <script src="js/animate.js"></script>

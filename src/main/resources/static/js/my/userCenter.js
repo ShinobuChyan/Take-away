@@ -4,7 +4,7 @@
 var interval = setInterval(() => {
     if (getResult) {
         clearInterval(interval);
-        if (user.id) {
+        if (!user.id) {
             alert('请登录');
             window.location.href = 'index';
         }
