@@ -350,10 +350,10 @@ Vue.component('admin-order-list', {
 Vue.component('change-food', {
     template: `<div id="changeAddress">
                 <div class="input-margin">
-                        <img style="max-width:200px;max-height:200px;" :src="wantImg||wantChange.img" alt="">
+                        <img class="foodImg" :src="wantImg||wantChange.img" alt="菜品图片">
                         <div class="input-group">
                             <span class="input-group-addon">图片:</span>
-                            <input type="file" @change="changImg" class="form-control" accept=".png,.jpg" aria-describedby="basic-addon3">
+                            <input type="file" id="uploadImg" @change="changImg" class="form-control" accept=".png,.jpg" aria-describedby="basic-addon3">
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">菜名:</span>
@@ -493,6 +493,8 @@ Vue.component('change-food', {
             // }
         },
         changePass() {
+            this.oldPssVer();
+            this.pwd2Ver();
             if (this.tips1 == this.tips2 == this.tips3 == '') {
                 $.post('manager/modifyCourse', {
                     id: this.wantChange.id || '',
@@ -506,6 +508,8 @@ Vue.component('change-food', {
                         message: '菜品添加或修改成功'
                     });
                     this.personName = this.phoneNum = this.address = '';
+                    this.wantImg = '';
+                    $('#uploadImg')[0].value = '';
                     this.init();
                 });
             }
@@ -513,10 +517,12 @@ Vue.component('change-food', {
         handleEdit(item) {
             this.wantChange = Object.assign({}, item);
             this.wantImg = '';
+            $('#uploadImg')[0].value = '';
         },
         cancel() {
             this.wantChange = {};
             this.wantImg = '';
+            $('#uploadImg')[0].value = '';
         }
     },
     watch: {
@@ -529,6 +535,7 @@ Vue.component('change-food', {
             } else {
                 this.personName = this.phoneNum = this.address = '';
                 this.wantImg = '';
+                $('#uploadImg')[0].value = '';
                 return;
             }
         }
