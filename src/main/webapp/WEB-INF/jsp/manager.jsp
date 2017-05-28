@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="" href="css/animate.css">
         <link rel="stylesheet" type="" href="css/element-ui.css">
+        <link rel="stylesheet" type="" href="css/main.css">
         <link rel="stylesheet" type="" href="css/userCenter.css">
     </head>
 

@@ -322,6 +322,8 @@ Vue.component('admin-order-list', {
         distribute(item) {
             $.get('manager/changeState', { id: item.id }, (res) => {
                 console.log('changeState', res);
+                if (res.code === '0')
+                    item.state = 1
                 this.$message({
                     showClose: true,
                     message: res.msg
@@ -331,5 +333,149 @@ Vue.component('admin-order-list', {
     }
 });
 
+Vue.component('change-food', {
+    template: `<div id="changeAddress">
+                <div class="input-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon">菜名:</span>
+                            <input type="text" v-model="personName" @blur="oldPssVer" class="form-control" id="registerName" placeholder="请输入菜名" aria-describedby="basic-addon3">
+                            <p class="err-tips">{{tips1}}</p>
+                        </div>
 
-Vue.component('');
+                        <div class="input-group">
+                            <span class="input-group-addon">类型:</span>
+                            <el-select v-model="value" placeholder="请选择">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">价格:</span>
+                            <input type="number" v-model="address" @blur="pwd2Ver" class="form-control" id="registerPwd2" placeholder="请输入价格" aria-describedby="basic-addon3">
+                            <p class="err-tips">{{tips3}}</p>
+                        </div>
+                        <button type="button" id="register-submit" class="btn btn-default btn-submit" @click="changePass">添加</button>
+                        <button type="button" id="register-submit" v-if="wantChange.id" class="btn btn-default btn-submit" @click="cancel">取消</button>
+                </div>
+                <ul class="list-group mid-margin">
+                    <li class="list-group-item list-item" :class="{isSelect:item.num>0}" v-for="item in list">
+                        <div class="img-margin"><img :src="item.img||'img/001.jpg'" alt=""></div>
+                        <span class="text title" v-text="item.name"></span>
+                        <span class="text volume" v-cloak>销量：{{item.volume||0}}</span>
+                        <span class="text price" v-cloak>价格：<span>{{item.price|money}}</span></span>
+                        <div class="num-margin">
+                            <el-button
+                            size="small"
+                            @click="">编辑</el-button>
+                            <el-button
+                            size="small"
+                            type="danger"
+                            @click="">删除</el-button>
+                        </div>
+                    </li>
+                </ul>
+                <div id="page-margin">
+                    <el-pagination layout="prev, pager, next" :page-count="pageCount" :current-page="currentPage">
+                    </el-pagination>
+                </div>
+            </div>`,
+    props: [],
+    data: function () {
+        return {
+            personName: '',
+            phoneNum: '0',
+            address: '',
+            tips1: '',
+            tips2: '',
+            tips3: '',
+            phonereg: /^[0-9]{7,15}$/,
+            wantChange: {},
+            tableData: [],
+            options: [{
+                value: '0',
+                label: '素菜'
+            }, {
+                value: '1',
+                label: '荤菜'
+            }, {
+                value: '2',
+                label: '汤'
+            }],
+            currentPage: 1,
+            pageCount: 1,
+            list: []
+        }
+    },
+    mounted() {
+        this.init();
+    },
+    methods: {
+        init() {
+            $.post('main/courseSearch', {
+                page: this.currentPage
+            }, (res) => {
+                this.pageCount = res.totalPages;
+                this.list = res.content;
+            });
+        },
+        oldPssVer() {
+            if (this.personName === '') {
+                this.tips1 = '菜名不能为空';
+                return false;
+            }
+            this.tips1 = '';
+        },
+        pwd1Ver() {
+            if (!this.phonereg.test(this.phoneNum)) {
+                this.tips2 = '手机号应该为7-15个数字';
+                return false;
+            }
+            this.tips2 = '';
+        },
+        pwd2Ver() {
+            if (this.address === '') {
+                this.tips3 = '价格不能为空';
+                return false;
+            }
+            this.tips3 = '';
+        },
+        changePass() {
+            if (this.tips1 == this.tips2 == this.tips3 == '') {
+                $.post('userCenter/changeAddress', {
+                    id: this.wantChange.id || '',
+                    userId: user.userId,
+                    name: this.personName,
+                    address: this.phoneNum,
+                    phone: this.address
+                }, (res) => {
+                    this.$message({
+                        showClose: true,
+                        message: '地址添加或修改成功'
+                    });
+                    this.personName = this.phoneNum = this.address = '';
+                });
+            }
+        },
+        handleEdit(index, row) {
+            this.wantChange = Object.assign({}, this.tableData[index]);
+        },
+        cancel() {
+            this.wantChange = {};
+        }
+    },
+    watch: {
+        wantChange() {
+            if (this.wantChange.id) {
+                this.personName = this.wantChange.name;
+                this.phoneNum = this.wantChange.phone;
+                this.address = this.wantChange.address;
+            } else {
+                this.personName = this.phoneNum = this.address = '';
+            }
+        }
+    }
+});
