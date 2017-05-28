@@ -71,7 +71,7 @@
 
             <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
                 <el-radio-group v-model="address">
-                    <el-radio :label="add.id" :key="add.id" v-for="add in addList">地址：{{add.address}} 收货人：{{add.name}}{{add.phone}}</el-radio>
+                    <el-radio :label="add.id" :key="add.id" v-for="add in addList">地址：{{add.address}} 收货人：{{add.name}}手机号:{{add.phone}}</el-radio><br>
                 </el-radio-group>
                 <div slot="footer" class="dialog-footer">
                     <el-button @click="dialogTableVisible = false">取 消</el-button>

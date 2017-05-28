@@ -74,6 +74,7 @@ var vm = new Vue({
             this.dialogTableVisible = true;
         },
         commit() {
+            this.dialogTableVisible = false;
             console.log('当前选中地址id', this.address);
             if (!this.address) {
                 this.$message({
