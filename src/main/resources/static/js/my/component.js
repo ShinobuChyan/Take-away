@@ -508,6 +508,7 @@ Vue.component('change-food', {
                         message: '菜品添加或修改成功'
                     });
                     this.personName = this.phoneNum = this.address = '';
+                    this.wantChange = {};
                     this.wantImg = '';
                     $('#uploadImg')[0].value = '';
                     this.init();
