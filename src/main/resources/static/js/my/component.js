@@ -350,6 +350,7 @@ Vue.component('admin-order-list', {
 Vue.component('change-food', {
     template: `<div id="changeAddress">
                 <div class="input-margin">
+                        <img :src="wantImg||wantChange.img" alt="">
                         <div class="input-group">
                             <span class="input-group-addon">图片:</span>
                             <input type="file" @change="changImg" class="form-control" accept=".png,.jpg" aria-describedby="basic-addon3">
@@ -425,7 +426,8 @@ Vue.component('change-food', {
             }],
             currentPage: 1,
             pageCount: 1,
-            list: []
+            list: [],
+            wantImg: '',
         }
     },
     mounted() {
@@ -479,19 +481,22 @@ Vue.component('change-food', {
             if (!files.length) return
             var vm = this;
             var reader = null;
-            var leng = files.length;
-            for (var i = 0; i < leng; i++) {
-                reader = new window.FileReader()
-                reader.readAsDataURL(file[i])
-                reader.onload = function (e) {
-                    console.log('img--------',e.target.result);
-                }
+            reader = new window.FileReader()
+            reader.readAsDataURL(files[0])
+            reader.onload = function (e) {
+                // console.log('img--------', e.target.result);
+                vm.wantImg = e.target.result;
             }
+            // var leng = files.length;
+            // for (var i = 0; i < leng; i++) {
+
+            // }
         },
         changePass() {
             if (this.tips1 == this.tips2 == this.tips3 == '') {
                 $.post('manager/modifyCourse', {
                     id: this.wantChange.id || '',
+                    img: this.wantImg,
                     name: this.personName,
                     type: this.phoneNum,
                     price: Math.floor(this.address * 100)
@@ -510,6 +515,7 @@ Vue.component('change-food', {
         },
         cancel() {
             this.wantChange = {};
+            this.wantImg = '';
         }
     },
     watch: {
@@ -521,6 +527,7 @@ Vue.component('change-food', {
                 return;
             } else {
                 this.personName = this.phoneNum = this.address = '';
+                this.wantImg = '';
                 return;
             }
         }
