@@ -350,7 +350,7 @@ Vue.component('admin-order-list', {
 Vue.component('change-food', {
     template: `<div id="changeAddress">
                 <div class="input-margin">
-                        <img :src="wantImg||wantChange.img" alt="">
+                        <img style="max-width:200px;max-height:200px;" :src="wantImg||wantChange.img" alt="">
                         <div class="input-group">
                             <span class="input-group-addon">图片:</span>
                             <input type="file" @change="changImg" class="form-control" accept=".png,.jpg" aria-describedby="basic-addon3">
@@ -512,6 +512,7 @@ Vue.component('change-food', {
         },
         handleEdit(item) {
             this.wantChange = Object.assign({}, item);
+            this.wantImg = '';
         },
         cancel() {
             this.wantChange = {};
