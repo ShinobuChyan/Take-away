@@ -236,6 +236,7 @@ Vue.component('order-list', {
                         <span class="courseCount">/{{courseItem.course.price|money}}</span>
                         <span class="courseName">&emsp;× {{courseItem.count}}</span>
                     </div>
+                    <span class="orderTime">总价：{{item.totalPrice}}</span><br/>
                     <span class="orderNum">地址：{{item.address}}</span>
                 </div>
                 <div id="page-margin">
@@ -277,6 +278,7 @@ Vue.component('admin-order-list', {
                         <span class="courseCount">/{{courseItem.course.price|money}}</span>
                         <span class="courseName">&emsp;× {{courseItem.count}}</span>
                     </div>
+                    <span class="orderTime">总价：{{item.totalPrice}}</span><br/>
                     <span class="orderNum">地址：{{item.address}}</span> <br />
                     <el-button type="primary" :disabled="item.state === 0" style="margin-left:350px;" @click="distribute(item)">配送</el-button>
                 </div>
@@ -309,8 +311,8 @@ Vue.component('admin-order-list', {
     },
     methods: {
         init() {
-            $.get('userCenter/orderList', { page: this.currentPage }, (res) => {
-                console.log('orderList', res);
+            $.get('manager/getOrderList', { page: this.currentPage }, (res) => {
+                console.log('getOrderList', res);
                 this.pageCount = res.totalPages;
                 this.listData = res.content.map(item => {
                     return Object.assign({ courses: JSON.parse(item.coursesString) }, item);
