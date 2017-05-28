@@ -1,5 +1,6 @@
 // 存贮用户信息
 var user = {};
+var getResult = false;
 
 $.get('login/getLoginInfo', (res) => {
     console.log(res);
@@ -9,6 +10,7 @@ $.get('login/getLoginInfo', (res) => {
         user = res;
         $('#userName').text(res.userName);
         $('#userMsg').css("display", "block");
+        getResult = true;
     }
 });
 

@@ -294,8 +294,9 @@ Vue.component('admin-order-list', {
                         <span class="courseCount">/{{courseItem.course.price|money}}</span>
                         <span class="courseName">&emsp;× {{courseItem.count}}</span>
                     </div>
-                    <el-button type="primary" :disabled="item.state === 0" style="margin-left:40px;" @click="distribute(item)">配送</el-button>
+                    <el-button type="primary" :disabled="item.state === 0" style="margin-left:40px;" @click="distribute(item)" v-popover:popover5>配送</el-button>
                 </div>
+                
                 <div id="page-margin">
                     <el-pagination layout="prev, pager, next" :page-count="pageCount" :current-page="currentPage">
                     </el-pagination>
@@ -321,7 +322,17 @@ Vue.component('admin-order-list', {
                 }
             ],
             pageCount: 1,
-            currentPage: 1
+            currentPage: 1,
+
+            dialogTableVisible: false,
+            address: '',
+            visible2: '',
+            addList: [{
+                id: '111',
+                address: 'a',
+                name: 'b',
+                phone: 'c'
+            }]
         }
     },
     mounted() {
@@ -342,7 +353,10 @@ Vue.component('admin-order-list', {
             // });
         },
         distribute(item) {
-
+            this.dialogTableVisible = true;
         }
     }
 });
+
+
+Vue.component('');
