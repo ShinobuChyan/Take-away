@@ -5,6 +5,7 @@ import com.takeaway.model.response.CommonResponse;
 import com.takeaway.model.user.Address;
 import com.takeaway.model.user.User;
 import com.takeaway.repository.order.OrderRepo;
+import com.takeaway.repository.user.AddressRepo;
 import com.takeaway.repository.user.UserRepo;
 import com.takeaway.service.myCenter.MyCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +27,24 @@ public class UserCenterController {
     private final
     UserRepo userRepo;
 
+    private final
+    AddressRepo addressRepo;
+
     @Autowired
-    public UserCenterController(MyCenterService myCenterService, UserRepo userRepo) {
+    public UserCenterController(MyCenterService myCenterService, UserRepo userRepo, AddressRepo addressRepo) {
         this.myCenterService = myCenterService;
         this.userRepo = userRepo;
+        this.addressRepo = addressRepo;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public String toMyCenter(HttpSession session) {
         if (session.getAttribute("userInfo") == null)
             return "redirect:/index";
+
+        User user = (User) session.getAttribute("userInfo");
+        if (user != null && user.getType() == 1)
+            return "redirect:/manager";
 
         return "userCenter";
     }
@@ -91,6 +100,16 @@ public class UserCenterController {
     @ResponseBody
     CommonResponse saveAddressChanges(Address address) {
         return myCenterService.saveAddressChanges(address);
+    }
+
+    @RequestMapping(value = "/deleteAddress")
+    public
+    @ResponseBody
+    CommonResponse deleteAddress(Long id) {
+
+        addressRepo.delete(id);
+
+        return new CommonResponse("0", "地址删除成功");
     }
 
 }

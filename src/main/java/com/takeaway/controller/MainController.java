@@ -4,6 +4,7 @@ import com.takeaway.model.menu.Menu;
 import com.takeaway.model.order.NewOrder;
 import com.takeaway.model.page.PageResponse;
 import com.takeaway.model.response.CommonResponse;
+import com.takeaway.model.user.User;
 import com.takeaway.repository.course.CourseRepo;
 import com.takeaway.service.order.OrderService;
 import com.takeaway.service.page.PageService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -26,18 +28,26 @@ public class MainController {
 
     private final OrderService orderService;
 
+    private final HttpSession session;
+
     @Autowired
     public MainController(
             PageService pageService,
             CourseRepo courseRepository,
-            OrderService orderService) {
+            OrderService orderService, HttpSession session) {
         this.pageService = pageService;
         this.courseRepository = courseRepository;
         this.orderService = orderService;
+        this.session = session;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public String userMain() {
+
+        User user = (User) session.getAttribute("userInfo");
+        if (user != null && user.getType() == 1)
+            return "redirect:/manager";
+
         return "main";
     }
 

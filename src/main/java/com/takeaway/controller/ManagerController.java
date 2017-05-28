@@ -45,7 +45,7 @@ public class ManagerController {
 
     @RequestMapping
     public String toManagerMain() {
-        return "managerMain";
+        return "manager";
     }
 
 
@@ -77,9 +77,9 @@ public class ManagerController {
     @ResponseBody
     CommonResponse addCourse(Course course, MultipartFile[] img) throws IOException {
 
-        course.setPrice(course.getPrice() * 100);
+//        course.setPrice(course.getPrice() * 100);
 
-        course.setImg(saveImg(img));
+//        course.setImg(saveImg(img));
 
         courseRepo.save(course);
         return new CommonResponse("0", "菜品添加成功");
@@ -89,8 +89,12 @@ public class ManagerController {
     public
     @ResponseBody
     CommonResponse modifyCourse(Course course, MultipartFile[] img) throws IOException {
-        course.setPrice(course.getPrice() * 100);
-        course.setImg(saveImg(img));
+//        course.setImg(saveImg(img));
+        Course oldCourse = courseRepo.findOne(course.getId());
+        course.setVolume(oldCourse.getVolume());
+
+        if ("".equals(course.getImg()))
+            course.setImg(null);
         courseRepo.save(course);
         return new CommonResponse("0", "菜品信息修改成功");
     }
