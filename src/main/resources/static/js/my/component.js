@@ -351,6 +351,10 @@ Vue.component('change-food', {
     template: `<div id="changeAddress">
                 <div class="input-margin">
                         <div class="input-group">
+                            <span class="input-group-addon">图片:</span>
+                            <input type="file" @change="changImg" class="form-control" accept=".png,.jpg" aria-describedby="basic-addon3">
+                        </div>
+                        <div class="input-group">
                             <span class="input-group-addon">菜名:</span>
                             <input type="text" v-model="personName" @blur="oldPssVer" class="form-control" id="registerName" placeholder="请输入菜名" aria-describedby="basic-addon3">
                             <p class="err-tips">{{tips1}}</p>
@@ -470,19 +474,34 @@ Vue.component('change-food', {
                 }
             });
         },
+        changImg(e) {
+            var files = e.target.files || e.dataTransfer.files
+            if (!files.length) return
+            var vm = this;
+            var reader = null;
+            var leng = files.length;
+            for (var i = 0; i < leng; i++) {
+                reader = new window.FileReader()
+                reader.readAsDataURL(file[i])
+                reader.onload = function (e) {
+                    console.log('img--------',e.target.result);
+                }
+            }
+        },
         changePass() {
             if (this.tips1 == this.tips2 == this.tips3 == '') {
                 $.post('manager/modifyCourse', {
                     id: this.wantChange.id || '',
                     name: this.personName,
                     type: this.phoneNum,
-                    price: this.address
+                    price: Math.floor(this.address * 100)
                 }, (res) => {
                     this.$message({
                         showClose: true,
                         message: '菜品添加或修改成功'
                     });
                     this.personName = this.phoneNum = this.address = '';
+                    this.init();
                 });
             }
         },
@@ -499,10 +518,10 @@ Vue.component('change-food', {
                 this.personName = this.wantChange.name;
                 this.phoneNum = this.wantChange.type + "";
                 this.address = (this.wantChange.price / 100).toFixed(2);
-                return ;
+                return;
             } else {
                 this.personName = this.phoneNum = this.address = '';
-                return ;
+                return;
             }
         }
     }
