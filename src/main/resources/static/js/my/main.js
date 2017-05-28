@@ -95,7 +95,6 @@ var vm = new Vue({
                     });
                     return false;
                 } else if (res.code === '0') {
-                    // 修改密码成功
                     this.$message({
                         showClose: true,
                         message: res.msg
