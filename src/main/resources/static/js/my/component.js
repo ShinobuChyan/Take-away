@@ -139,7 +139,7 @@ Vue.component('change-address', {
                         <el-button
                           size="small"
                           type="danger"
-                          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                          @click="deleteAdd(scope.$index, scope.row)">删除</el-button>
                       </template>
                     </el-table-column>
                   </el-table>
@@ -203,8 +203,22 @@ Vue.component('change-address', {
                         message: '地址添加或修改成功'
                     });
                     this.personName = this.phoneNum = this.address = '';
+                    this.init();
                 });
             }
+        },
+        deleteAdd(index, row) {
+            $.post('userCenter/deleteAddress', {
+                id: this.tableData[index].id
+            }, (res) => {
+                this.$message({
+                    showClose: true,
+                    message: res.msg
+                });
+                if (res.code === '0') {
+                    this.tableData.splice(index, 1);
+                }
+            });
         },
         handleEdit(index, row) {
             this.wantChange = Object.assign({}, this.tableData[index]);
@@ -323,7 +337,7 @@ Vue.component('admin-order-list', {
             $.get('manager/changeState', { id: item.id }, (res) => {
                 console.log('changeState', res);
                 if (res.code === '0')
-                    item.state = 1
+                    item.state = 0
                 this.$message({
                     showClose: true,
                     message: res.msg
@@ -344,7 +358,7 @@ Vue.component('change-food', {
 
                         <div class="input-group">
                             <span class="input-group-addon">类型:</span>
-                            <el-select v-model="value" placeholder="请选择">
+                            <el-select v-model="phoneNum" placeholder="请选择">
                                 <el-option
                                 v-for="item in options"
                                 :key="item.value"
@@ -362,7 +376,7 @@ Vue.component('change-food', {
                         <button type="button" id="register-submit" v-if="wantChange.id" class="btn btn-default btn-submit" @click="cancel">取消</button>
                 </div>
                 <ul class="list-group mid-margin">
-                    <li class="list-group-item list-item" :class="{isSelect:item.num>0}" v-for="item in list">
+                    <li class="list-group-item list-item" :class="{isSelect:item.num>0}" v-for="(item,index) in list">
                         <div class="img-margin"><img :src="item.img||'img/001.jpg'" alt=""></div>
                         <span class="text title" v-text="item.name"></span>
                         <span class="text volume" v-cloak>销量：{{item.volume||0}}</span>
@@ -370,11 +384,11 @@ Vue.component('change-food', {
                         <div class="num-margin">
                             <el-button
                             size="small"
-                            @click="">编辑</el-button>
+                            @click="handleEdit(item)">编辑</el-button>
                             <el-button
                             size="small"
                             type="danger"
-                            @click="">删除</el-button>
+                            @click="deleteFood(item,index)">删除</el-button>
                         </div>
                     </li>
                 </ul>
@@ -443,6 +457,19 @@ Vue.component('change-food', {
             }
             this.tips3 = '';
         },
+        deleteFood(item, index) {
+            $.post('manager/deleteCourse', {
+                id: item.id
+            }, (res) => {
+                this.$message({
+                    showClose: true,
+                    message: res.msg
+                });
+                if (res.code === '0') {
+                    this.list.splice(index, 1);
+                }
+            });
+        },
         changePass() {
             if (this.tips1 == this.tips2 == this.tips3 == '') {
                 $.post('userCenter/changeAddress', {
@@ -460,8 +487,8 @@ Vue.component('change-food', {
                 });
             }
         },
-        handleEdit(index, row) {
-            this.wantChange = Object.assign({}, this.tableData[index]);
+        handleEdit(item) {
+            this.wantChange = Object.assign({}, item);
         },
         cancel() {
             this.wantChange = {};
@@ -471,10 +498,12 @@ Vue.component('change-food', {
         wantChange() {
             if (this.wantChange.id) {
                 this.personName = this.wantChange.name;
-                this.phoneNum = this.wantChange.phone;
-                this.address = this.wantChange.address;
+                this.phoneNum = this.wantChange.type + "";
+                this.address = (this.wantChange.price / 100).toFixed(2);
+                return ;
             } else {
                 this.personName = this.phoneNum = this.address = '';
+                return ;
             }
         }
     }

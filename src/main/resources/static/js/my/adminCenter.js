@@ -10,7 +10,7 @@
 var vm = new Vue({
     el:'#app',
     data: {
-        tools: [{name:'订单管理',component:'admin-order-list'},{name:'餐品管理',component: ''}],
+        tools: [{name:'订单管理',component:'admin-order-list'},{name:'餐品管理',component: 'change-food'}],
         selectedTools: {name:'订单管理',component:'admin-order-list'},
     },
     mounted() {},
