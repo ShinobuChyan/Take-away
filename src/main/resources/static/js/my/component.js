@@ -103,7 +103,7 @@ Vue.component('change-address', {
                             <input type="text" v-model="address" @blur="pwd2Ver" class="form-control" id="registerPwd2" placeholder="请输入收货地址" aria-describedby="basic-addon3">
                             <p class="err-tips">{{tips3}}</p>
                         </div>
-                        <button type="button" id="register-submit" class="btn btn-default btn-submit" @click="changePass">添加</button>
+                        <button type="button" id="register-submit" class="btn btn-default btn-submit" @click="changePass">{{wantChange.id?'修改':'添加'}}</button>
                         <button type="button" id="register-submit" v-if="wantChange.id" class="btn btn-default btn-submit" @click="cancel">取消</button>
                 </div>
                 <el-table
@@ -372,7 +372,7 @@ Vue.component('change-food', {
                             <input type="number" v-model="address" @blur="pwd2Ver" class="form-control" id="registerPwd2" placeholder="请输入价格" aria-describedby="basic-addon3">
                             <p class="err-tips">{{tips3}}</p>
                         </div>
-                        <button type="button" id="register-submit" class="btn btn-default btn-submit" @click="changePass">添加</button>
+                        <button type="button" id="register-submit" class="btn btn-default btn-submit" @click="changePass">{{wantChange.id?'修改':'添加'}}</button>
                         <button type="button" id="register-submit" v-if="wantChange.id" class="btn btn-default btn-submit" @click="cancel">取消</button>
                 </div>
                 <ul class="list-group mid-margin">
@@ -472,16 +472,15 @@ Vue.component('change-food', {
         },
         changePass() {
             if (this.tips1 == this.tips2 == this.tips3 == '') {
-                $.post('userCenter/changeAddress', {
+                $.post('manager/modifyCourse', {
                     id: this.wantChange.id || '',
-                    userId: user.userId,
                     name: this.personName,
-                    address: this.phoneNum,
-                    phone: this.address
+                    type: this.phoneNum,
+                    price: this.address
                 }, (res) => {
                     this.$message({
                         showClose: true,
-                        message: '地址添加或修改成功'
+                        message: '菜品添加或修改成功'
                     });
                     this.personName = this.phoneNum = this.address = '';
                 });

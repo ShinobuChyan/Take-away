@@ -167,7 +167,7 @@ $('.close').click(function() {
 // 注销事件
 $('#cancellation').click(function() {
     $.get('login/logOut',function () {
-        window.location.reload();
+        window.location.href = 'index';
     })
 });
 
