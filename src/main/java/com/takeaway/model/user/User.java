@@ -9,8 +9,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "userid")
-    private Long userId;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "username")
     private String userName;
@@ -26,12 +26,12 @@ public class User {
     @JoinColumn(name = "userid")
     private List<Address> addressList;
 
-    public Long getUserId() {
-        return userId;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUserName() {

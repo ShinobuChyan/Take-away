@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.takeaway.model.course.SelectedCourse;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Order {
     @Column(name = "createtime")
     private Date createTime;
 
-    private Integer state;          // -1 待支付, 0 支付成功, 1 支付失败
+    private Integer state;          // -1 待配送, 0 配送成功, 1 配送失败
 
     @Column(name = "coursestring")
     private String coursesString;
@@ -29,10 +30,18 @@ public class Order {
     @Column(name = "userid")
     private Long userId;
 
-    @Column(name = "paymethod")
-    private Integer payMethod;
+    @Column(name = "totalprice")
+    private Long totalPrice;
+
+    private String address;
 
     private transient List<SelectedCourse> courses;
+
+    private transient String timeStamp;
+
+    public void fmtTime() {
+        this.timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(createTime);
+    }
 
     public void coursesStrToCourses() {
         this.courses = JSON.parseArray(this.coursesString, SelectedCourse.class);
@@ -82,14 +91,6 @@ public class Order {
         this.userId = userId;
     }
 
-    public Integer getPayMethod() {
-        return payMethod;
-    }
-
-    public void setPayMethod(Integer payMethod) {
-        this.payMethod = payMethod;
-    }
-
     public String getCoursesString() {
         return coursesString;
     }
@@ -104,5 +105,29 @@ public class Order {
 
     public void setCourses(List<SelectedCourse> courses) {
         this.courses = courses;
+    }
+
+    public Long getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Long totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

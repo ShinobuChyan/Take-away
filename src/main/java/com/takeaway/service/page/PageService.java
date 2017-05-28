@@ -9,4 +9,6 @@ public interface PageService {
 
     PageResponse orderList(Integer page, Long userId);
 
+    PageResponse orderList(Integer page, String orderNo);
+
 }

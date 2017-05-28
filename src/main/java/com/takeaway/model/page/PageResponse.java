@@ -2,13 +2,13 @@ package com.takeaway.model.page;
 
 import java.util.List;
 
-public class PageResponse<T> {
+public class PageResponse {
 
     private Long totalElements;
 
     private Integer totalPages;
 
-    private List<T> content;
+    private List content;
 
     public Long getTotalElements() {
         return totalElements;
@@ -26,11 +26,11 @@ public class PageResponse<T> {
         this.totalPages = totalPages;
     }
 
-    public List<T> getContent() {
+    public List getContent() {
         return content;
     }
 
-    public void setContent(List<T> content) {
+    public void setContent(List content) {
         this.content = content;
     }
 }

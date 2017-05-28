@@ -4,6 +4,8 @@ import com.takeaway.model.page.PageResponse;
 import com.takeaway.model.response.CommonResponse;
 import com.takeaway.model.user.Address;
 import com.takeaway.model.user.User;
+import com.takeaway.repository.order.OrderRepo;
+import com.takeaway.repository.user.UserRepo;
 import com.takeaway.service.myCenter.MyCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +23,13 @@ public class UserCenterController {
     private final
     MyCenterService myCenterService;
 
+    private final
+    UserRepo userRepo;
+
     @Autowired
-    public UserCenterController(MyCenterService myCenterService) {
+    public UserCenterController(MyCenterService myCenterService, UserRepo userRepo) {
         this.myCenterService = myCenterService;
+        this.userRepo = userRepo;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -60,6 +66,13 @@ public class UserCenterController {
         return myCenterService.getOrderList(user, page);
     }
 
+    @RequestMapping(value = "/cancle")
+    public
+    @ResponseBody
+    CommonResponse cancleOrder(Long id) {
+        return myCenterService.cancleOrder(id);
+    }
+
     @RequestMapping(value = "/address", method = RequestMethod.GET)
     public String toAddress() {
         return "myCenterAddress";
@@ -70,7 +83,7 @@ public class UserCenterController {
     @ResponseBody
     List<Address> getAddressList(HttpSession session) {
         User user = (User) session.getAttribute("userInfo");
-        return user.getAddressList();
+        return userRepo.findById(user.getId()).getAddressList();
     }
 
     @RequestMapping(value = "/changeAddress", method = RequestMethod.POST)

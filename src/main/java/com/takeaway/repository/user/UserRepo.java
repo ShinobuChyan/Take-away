@@ -14,4 +14,6 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     Integer countByUserName(String userName);
 
+    User findById(Long id);
+
 }

@@ -1,21 +1,16 @@
 package com.takeaway.model.course;
 
-import java.util.List;
-import java.util.Map;
-
 public class SelectedCourse {
 
     private Course course;
 
     private Integer count;
 
-    public SelectedCourse() {
-
-    }
+    public SelectedCourse() {}
 
     public SelectedCourse(Course course, Integer count) {
-        this.count = count;
         this.course = course;
+        this.count = count;
     }
 
     public Integer getCount() {
