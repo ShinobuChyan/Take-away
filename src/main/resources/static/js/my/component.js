@@ -283,3 +283,66 @@ Vue.component('order-list', {
         },
     }
 });
+
+Vue.component('admin-order-list', {
+    template: `<div id="orderList">
+                <div class="order" v-for="item in listData">
+                    <span class="orderNum">订单号：{{item.orderNo}}</span>
+                    <span class="orderTime">时间：{{item.createTime}}</span>
+                    <div class="course" v-for="courseItem in item.courses">
+                        <span class="coursePrice">{{courseItem.course.name}}</span>
+                        <span class="courseCount">/{{courseItem.course.price|money}}</span>
+                        <span class="courseName">&emsp;× {{courseItem.count}}</span>
+                    </div>
+                    <el-button type="primary" :disabled="item.state === 0" style="margin-left:40px;" @click="distribute(item)">配送</el-button>
+                </div>
+                <div id="page-margin">
+                    <el-pagination layout="prev, pager, next" :page-count="pageCount" :current-page="currentPage">
+                    </el-pagination>
+                </div>
+            </div>`,
+    props: [],
+    data: function () {
+        return {
+            listData: [
+                {
+                    orderNo: 123123,
+                    createTime: '2016-12-12',
+                    courses: [
+                        {
+                            count: 1,
+                            course: {
+                                name: '土豆丝',
+                                price: 1200,
+                            }
+                        }
+                    ],
+                    state: 1
+                }
+            ],
+            pageCount: 1,
+            currentPage: 1
+        }
+    },
+    mounted() {
+        this.init();
+    },
+    methods: {
+        init() {
+            // $.get('userCenter/orderList', { page: this.currentPage }, (res) => {
+            //     console.log('orderList', res);
+            //     this.pageCount = res.totalPages;
+            //     this.listData = res.content.map(item => {
+            //         return {
+            //             orderNo: item.orderNo,
+            //             createTime: item.createTime,
+            //             courses: JSON.parse(item.coursesString)
+            //         }
+            //     });
+            // });
+        },
+        distribute(item) {
+
+        }
+    }
+});
