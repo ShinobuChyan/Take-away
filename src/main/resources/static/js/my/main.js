@@ -40,16 +40,16 @@ var vm = new Vue({
         searchstr: searchStr,
         dialogTableVisible: false,
         address: '',
-        addList: [{
-            id: '111',
-            address: 'a',
-            name: 'b',
-            phone: 'c'
-        }]
+        addList: []
     },
     mounted() {
         $.get('main/getMenu', (res) => {
             this.typeLIst = res;
+        });
+        $.get('userCenter/getAddressList', (res) => {
+            console.log('getAddressList', res);
+            this.addList = res;
+            this.address = this.addList[0].id;
         });
         this.search();
     },
@@ -74,26 +74,35 @@ var vm = new Vue({
             this.dialogTableVisible = true;
         },
         commit() {
-            console.log(this.address);
-            // $.post('main/submit', { newOrder: orderList }, (res) => {
-            //     console.log('提交订单返回：', res);
-            //     if (res.code === '1') {
-            //         this.$message({
-            //             showClose: true,
-            //             message: res.msg
-            //         });
-            //         return false;
-            //     } else if (res.code === '0') {
-            //         // 修改密码成功
-            //         this.$message({
-            //             showClose: true,
-            //             message: res.msg
-            //         });
-            //         this.list.forEach(item => {
-            //             item.num = 0;
-            //         });
-            //     }
-            // });
+            console.log('当前选中地址id', this.address);
+            if (!this.address) {
+                this.$message({
+                    showClose: true,
+                    message: '登陆后才能提交订单，请登录'
+                });
+            }
+            $.post('main/submit', {
+                newOrder: orderList,
+                addressId: this.address
+            }, (res) => {
+                console.log('提交订单返回：', res);
+                if (res.code === '1') {
+                    this.$message({
+                        showClose: true,
+                        message: res.msg
+                    });
+                    return false;
+                } else if (res.code === '0') {
+                    // 修改密码成功
+                    this.$message({
+                        showClose: true,
+                        message: res.msg
+                    });
+                    this.list.forEach(item => {
+                        item.num = 0;
+                    });
+                }
+            });
         },
         search() {
             console.log('搜索', this.searchstr);
