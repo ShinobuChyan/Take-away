@@ -35,7 +35,7 @@ public class PageServiceImpl implements PageService {
     @Override
     public PageResponse courseSearch(Integer page, Integer type, String courseName) {
 
-        Specification<Course> condition = (root, query, cb) -> {
+        Specification condition = (root, query, cb) -> {
 
             List<Predicate> predicates = new ArrayList<>();
 
@@ -47,7 +47,7 @@ public class PageServiceImpl implements PageService {
             return cb.and(predicates.toArray(new Predicate[predicates.size()]));
         };
 
-        Page<Course> pages = courseRepository.findAll(condition, new PageRequest(page - 1, 20));
+        Page pages = courseRepository.findAll(condition, new PageRequest(page - 1, 20));
 
         return PageUtil.getPageResponse(pages);
     }
@@ -58,9 +58,38 @@ public class PageServiceImpl implements PageService {
         Page<Order> pages = orderRepo.findByUserId(new PageRequest(page - 1, 20), userId);
         PageResponse resp = PageUtil.getPageResponse(pages);
         List<Order> cont = resp.getContent();
-        cont.forEach(Order::coursesStrToCourses);
+        cont.forEach(order -> {
+            order.coursesStrToCourses();
+            order.fmtTime();
+        });
+        resp.setContent(cont);
 
-        return PageUtil.getPageResponse(pages);
+        return resp;
+    }
+
+    @Override
+    public PageResponse orderList(Integer page, String orderNo) {
+
+        Specification<Order> condition = (root, query, cb) -> {
+
+            List<Predicate> predicates = new ArrayList<>();
+
+            if (orderNo != null)
+                predicates.add(cb.equal(root.get("orderNo"), orderNo));
+
+            return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+        };
+
+        Page<Order> pages = orderRepo.findAll(condition, new PageRequest(page - 1, 10));
+        PageResponse resp = PageUtil.getPageResponse(pages);
+        List<Order> cont = resp.getContent();
+        cont.forEach(order -> {
+            order.coursesStrToCourses();
+            order.fmtTime();
+        });
+        resp.setContent(cont);
+
+        return resp;
     }
 
 }

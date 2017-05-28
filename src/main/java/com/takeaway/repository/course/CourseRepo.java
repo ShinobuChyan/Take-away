@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Map;
 
@@ -23,5 +24,7 @@ public interface CourseRepo extends JpaRepository<Course, Long>, JpaSpecificatio
     @Query(value = "select u.id, u.type as type, count(u) as count from Course u group by type")
     @Modifying
     List<Object[]> countType();
+
+    Course findById(Long id);
 
 }

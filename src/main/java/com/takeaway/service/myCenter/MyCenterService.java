@@ -13,6 +13,8 @@ public interface MyCenterService {
 
     PageResponse getOrderList(User user, Integer page);
 
+    CommonResponse cancleOrder(Long id);
+
     CommonResponse saveAddressChanges(Address address);
 
 }

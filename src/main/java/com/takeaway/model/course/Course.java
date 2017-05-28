@@ -16,9 +16,9 @@ public class Course {
 
     private Integer type;
 
-    private Long price;
+    private Integer price;
 
-    private Long volume;
+    private Integer volume;
 
     private String remark;
 
@@ -46,22 +46,6 @@ public class Course {
         this.img = img;
     }
 
-    public Long getPrice() {
-        return price;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
-    }
-
-    public Long getVolume() {
-        return volume;
-    }
-
-    public void setVolume(Long volume) {
-        this.volume = volume;
-    }
-
     public Integer getType() {
         return type;
     }
@@ -76,5 +60,21 @@ public class Course {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Integer getVolume() {
+        return volume;
+    }
+
+    public void setVolume(Integer volume) {
+        this.volume = volume;
     }
 }
