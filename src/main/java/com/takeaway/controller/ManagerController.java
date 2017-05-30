@@ -107,20 +107,4 @@ public class ManagerController {
         return new CommonResponse("0", "菜品删除成功");
     }
 
-    private String saveImg(MultipartFile[] images) throws IllegalStateException, IOException {
-
-        MultipartFile image = images[0];
-
-        String imageName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) +
-                new Random().nextInt(9) +
-                new Random().nextInt(9) +
-                new Random().nextInt(9) +
-                image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
-
-        String filePath = servletContext.getRealPath("http://localhost:8080/takeaway/img/course/") + imageName;
-        image.transferTo(new File(filePath));
-
-        return imageName;
-    }
-
 }

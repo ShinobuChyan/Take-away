@@ -35,7 +35,7 @@
                     <div class="col-md-6 col-margin">
                         <ul class="list-group mid-margin">
                             <li class="list-group-item list-item" :class="{isSelect:item.num>0}" v-for="item in list">
-                                <div class="img-margin"><img :src="item.img||'img/001.jpg'" alt=""></div>
+                                <div class="img-margin"><img :src="item.img||'img/001.png'" alt=""></div>
                                 <span class="text title" v-text="item.name"></span>
                                 <span class="text volume" v-cloak>销量：{{item.volume||0}}</span>
                                 <span class="text price" v-cloak>价格：<span>{{item.price|money}}</span></span>

@@ -36,7 +36,7 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon">密码:</span>
-                        <input type="password" class="form-control" id="loginPwd" name="password" placeholder="请输入密码" aria-describedby="basic-addon3">
+                        <input type="text" class="form-control" id="loginPwd" name="password" placeholder="请输入密码" aria-describedby="basic-addon3" onfocus="this.type='password'">
                         <p class="err-tips"></p>
                     </div>
                     <button type="button" id="login-submit" class="btn btn-default btn-submit">登陆</button>
@@ -55,12 +55,12 @@
 
                         <div class="input-group">
                             <span class="input-group-addon">密码:</span>
-                            <input type="password" class="form-control" id="registerPwd" placeholder="请输入密码" aria-describedby="basic-addon3">
+                            <input type="password" class="form-control" id="registerPwd" placeholder="请输入密码" aria-describedby="basic-addon3" onfocus="this.type='password'">
                             <p class="err-tips"></p>
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">确认密码:</span>
-                            <input type="password" class="form-control" id="registerPwd2" placeholder="请再次输入密码" aria-describedby="basic-addon3">
+                            <input type="password" class="form-control" id="registerPwd2" placeholder="请再次输入密码" aria-describedby="basic-addon3" onfocus="this.type='password'">
                             <p class="err-tips"></p>
                         </div>
                         <button type="button" id="register-submit" class="btn btn-default btn-submit">注册</button>

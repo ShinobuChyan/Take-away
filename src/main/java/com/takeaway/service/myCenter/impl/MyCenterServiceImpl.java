@@ -13,6 +13,7 @@ import com.takeaway.service.page.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 @Service
@@ -26,12 +27,15 @@ public class MyCenterServiceImpl implements MyCenterService {
 
     private final OrderRepo orderRepo;
 
+    private final HttpSession session;
+
     @Autowired
-    public MyCenterServiceImpl(UserRepo userRepo, PageService pageService, AddressRepo addressRepo, OrderRepo orderRepo) {
+    public MyCenterServiceImpl(UserRepo userRepo, PageService pageService, AddressRepo addressRepo, OrderRepo orderRepo, HttpSession session) {
         this.userRepo = userRepo;
         this.pageService = pageService;
         this.addressRepo = addressRepo;
         this.orderRepo = orderRepo;
+        this.session = session;
     }
 
     @Override
@@ -74,6 +78,9 @@ public class MyCenterServiceImpl implements MyCenterService {
 
     @Override
     public CommonResponse saveAddressChanges(Address address) {
+
+        User user = (User) session.getAttribute("userInfo");
+        address.setUserId(user.getId());
 
         addressRepo.save(address);
 
