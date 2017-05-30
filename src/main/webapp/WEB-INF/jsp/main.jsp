@@ -27,8 +27,8 @@
                 <div class="row">
                     <div class="col-md-3 col-margin">
                         <ul class="list-group left-margin">
-                            <li class="list-group-item" v-for="item in typeLIst" @click="changeType(item)">
-                                <span class="badge" :class="{selected:selectedType.type==item.type}">{{item.count}}</span> {{typeMap[item.type]}}
+                            <li class="list-group-item" :class="{active:selectedType.type==item.type}" v-for="item in typeLIst" @click="changeType(item)">
+                                <span class="badge">{{item.count}}</span> {{typeMap[item.type]}}
                             </li>
                         </ul>
                     </div>
