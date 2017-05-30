@@ -138,3 +138,7 @@ body {
 #cart-margin .commit {
     margin-top: 10px;
 }
+
+.col-md-3 .list-group-item {
+    cursor: pointer;
+}
