@@ -37,6 +37,7 @@ var vm = new Vue({
         list: [],
         typeMap,
         typeLIst: [],
+        selectedType: {},
         searchstr: searchStr,
         dialogTableVisible: false,
         address: '',
@@ -72,17 +73,20 @@ var vm = new Vue({
                 }
             });
 
+            if (getResult && user.id) {
+                this.$message({
+                    showClose: true,
+                    message: '登陆后才能提交订单，请登录'
+                });
+                return;
+            }
+
             this.dialogTableVisible = true;
         },
         commit() {
             this.dialogTableVisible = false;
             console.log('当前选中地址id', this.address);
-            if (!this.address) {
-                this.$message({
-                    showClose: true,
-                    message: '登陆后才能提交订单，请登录'
-                });
-            }
+
             $.post('main/submit', {
                 newOrder: this.orderList,
                 addressId: this.address
@@ -109,7 +113,8 @@ var vm = new Vue({
             console.log('搜索', this.searchstr);
             $.post('main/courseSearch', {
                 page: this.currentPage,
-                courseName: this.searchstr
+                courseName: this.searchstr,
+                type: this.selectedType.type
             }, (res) => {
                 this.pageCount = res.totalPages;
                 var newList = [];
@@ -119,6 +124,14 @@ var vm = new Vue({
                 });
                 this.list = newList;
             });
+        },
+        changeType(item) {
+            if (this.selectedType.type === item.type) {
+                this.selectedType = {};
+            } else {
+                this.selectedType = item.type;
+            }
+            this.search();
         }
     }
 });
