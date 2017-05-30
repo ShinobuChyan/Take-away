@@ -195,8 +195,8 @@ Vue.component('change-address', {
                     id: this.wantChange.id || '',
                     userId: user.userId,
                     name: this.personName,
-                    address: this.phoneNum,
-                    phone: this.address
+                    address: this.address,
+                    phone: this.phoneNum
                 }, (res) => {
                     this.$message({
                         showClose: true,
