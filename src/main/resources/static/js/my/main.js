@@ -73,17 +73,20 @@ var vm = new Vue({
                 }
             });
 
+            if (getResult && user.id) {
+                this.$message({
+                    showClose: true,
+                    message: '登陆后才能提交订单，请登录'
+                });
+                return;
+            }
+
             this.dialogTableVisible = true;
         },
         commit() {
             this.dialogTableVisible = false;
             console.log('当前选中地址id', this.address);
-            if (!this.address) {
-                this.$message({
-                    showClose: true,
-                    message: '登陆后才能提交订单，请登录'
-                });
-            }
+
             $.post('main/submit', {
                 newOrder: this.orderList,
                 addressId: this.address
