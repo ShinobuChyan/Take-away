@@ -1,10 +1,10 @@
 package com.takeaway.controller;
 
+import com.takeaway.model.user.AddressModel;
 import com.takeaway.model.page.PageResponse;
 import com.takeaway.model.response.CommonResponse;
 import com.takeaway.model.user.Address;
 import com.takeaway.model.user.User;
-import com.takeaway.repository.order.OrderRepo;
 import com.takeaway.repository.user.AddressRepo;
 import com.takeaway.repository.user.UserRepo;
 import com.takeaway.service.myCenter.MyCenterService;
@@ -98,7 +98,14 @@ public class UserCenterController {
     @RequestMapping(value = "/changeAddress", method = RequestMethod.POST)
     public
     @ResponseBody
-    CommonResponse saveAddressChanges(Address address) {
+    CommonResponse saveAddressChanges(AddressModel addressModel) {
+
+        Address address = new Address();
+        address.setId(addressModel.getId());
+        address.setName(addressModel.getName());
+        address.setAddress(addressModel.getAddress());
+        address.setPhone(addressModel.getPhone());
+
         return myCenterService.saveAddressChanges(address);
     }
 
