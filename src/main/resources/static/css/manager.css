@@ -1,0 +1,67 @@
+ul .list-group .left-margin {
+    margin-left: 0;
+}
+
+#adminList {
+    padding: 0 0 0 100px;
+}
+
+#adminList .order {
+    width: 500px;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    border: solid 1px #ccc;
+    padding: 20px 20px 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+#adminList .order .orderNum {
+    padding-left: 20px;
+    padding-right: 20px;
+    color: darkorange;
+    font-size: 20px;
+}
+
+#adminList .order .orderTime {
+    font-size: 14px;
+    margin-bottom: 0;
+    padding-left: 20px;
+}
+
+#adminList .order .course {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 15px;
+}
+
+#adminList .order .course span {
+    font-size: 16px;
+    color: #999999;
+}
+
+#adminList .order .course span.courseName {
+    float: right;
+}
+
+#adminList .order .totalPrice {
+    float: right;
+    padding: 20px 20px 5px;
+    font-size: 14px;
+}
+
+#adminList .order .totalPrice span {
+    font-size: 20px;
+    color: orangered;
+}
+
+#adminList .order .address {
+    padding-top: 5px;
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+#adminList #page-margin {
+    margin: 20px auto 100px -200px;
+}

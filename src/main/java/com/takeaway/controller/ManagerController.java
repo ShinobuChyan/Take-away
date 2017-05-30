@@ -90,8 +90,11 @@ public class ManagerController {
     @ResponseBody
     CommonResponse modifyCourse(Course course, MultipartFile[] img) throws IOException {
 //        course.setImg(saveImg(img));
-        Course oldCourse = courseRepo.findOne(course.getId());
-        course.setVolume(oldCourse.getVolume());
+        Course oldCourse;
+        if (course.getId() != null) {
+            oldCourse = courseRepo.findOne(course.getId());
+            course.setVolume(oldCourse.getVolume());
+        }
 
         if ("".equals(course.getImg()))
             course.setImg(null);

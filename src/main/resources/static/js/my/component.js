@@ -251,7 +251,7 @@ Vue.component('order-list', {
                         <span class="courseCount">/{{courseItem.course.price|money}}</span>
                         <span class="courseName">&emsp;× {{courseItem.count}}</span>
                     </div>
-                    <p class="totalPrice">总价：<span>{{item.totalPrice}}</span></p>
+                    <p class="totalPrice">总价：<span>{{item.totalPrice|money}}</span></p>
                 </div>
                 <div id="page-margin">
                     <el-pagination layout="prev, pager, next" :page-count="pageCount" :current-page="currentPage">
@@ -283,18 +283,18 @@ Vue.component('order-list', {
 });
 
 Vue.component('admin-order-list', {
-    template: `<div id="orderList">
+    template: `<div id="adminList">
                 <div class="order" v-for="item in listData">
-                    <span class="orderNum">订单号：{{item.orderNo}}</span>
-                    <span class="orderTime">时间：{{item.timeStamp}}</span>
+                    <p class="orderNum">订单号：{{item.orderNo}}</p>
+                    <p class="orderTime">时间：{{item.timeStamp}}</p>
+                    <p class="address">地址：{{item.address}}</p>
                     <div class="course" v-for="courseItem in item.courses">
                         <span class="coursePrice">{{courseItem.course.name}}</span>
                         <span class="courseCount">/{{courseItem.course.price|money}}</span>
                         <span class="courseName">&emsp;× {{courseItem.count}}</span>
                     </div>
-                    <span class="orderTime">总价：{{item.totalPrice}}</span><br/>
-                    <span class="orderNum">地址：{{item.address}}</span> <br />
-                    <el-button type="primary" :disabled="item.state === 0" style="margin-left:350px;" @click="distribute(item)">配送</el-button>
+                    <p class="totalPrice">总价：<span>{{item.totalPrice|money}}</span></p>
+                    <el-button type="primary" :disabled="item.state === 0" style="margin-left:320px;width: 120px" @click="distribute(item)">配送</el-button>
                 </div>
                 
                 <div id="page-margin">
@@ -326,7 +326,6 @@ Vue.component('admin-order-list', {
     methods: {
         init() {
             $.get('manager/getOrderList', { page: this.currentPage }, (res) => {
-                console.log('getOrderList', res);
                 this.pageCount = res.totalPages;
                 this.listData = res.content.map(item => {
                     return Object.assign({ courses: JSON.parse(item.coursesString) }, item);
