@@ -129,7 +129,7 @@ var vm = new Vue({
             if (this.selectedType.type === item.type) {
                 this.selectedType = {};
             } else {
-                this.selectedType = item.type;
+                this.selectedType = item;
             }
             this.search();
         }
