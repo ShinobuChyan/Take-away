@@ -1,5 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-    <html lang="en">
+    <html lang="zh-CN">
 
     <head>
         <meta charset="UTF-8">
@@ -9,6 +10,7 @@
         <link rel="stylesheet" type="" href="css/element-ui.css">
         <link rel="stylesheet" type="" href="css/main.css">
         <link rel="stylesheet" type="" href="css/userCenter.css">
+        <link rel="stylesheet" type="" href="css/manager.css">
     </head>
 
     <body>
@@ -19,7 +21,7 @@
                     <div class="col-md-2 col-margin">
                     </div>
                     <div class="col-md-2 col-margin">
-                        <ul class="list-group left-margin">
+                        <ul class="list-group">
                             <li class="list-group-item" :class="{active:selectedTools.name==item.name}" v-for="item in tools" @click="selectedTools=item">
                                 {{item.name}}
                             </li>

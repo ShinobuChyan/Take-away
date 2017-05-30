@@ -41,9 +41,6 @@ public class TakeawayApplicationTests {
 	@Test
 	public void contextLoads() {
 
-        User user = userRepo.findByUserNameAndPassword("user", "123456");
-        List<Address> addresses = user.getAddressList();
-
     }
 
 }

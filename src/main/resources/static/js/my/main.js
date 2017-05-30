@@ -1,7 +1,7 @@
 var menuList = [{
     id: 1,
     name: '鱼香肉丝',
-    img: 'img/001.jpg',
+    img: 'img/001.png',
     type: 1,
     price: 1200,
     volume: 12,

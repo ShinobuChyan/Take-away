@@ -108,7 +108,7 @@ $('#register-submit').click(function() {
             alert(res.msg);
             return false;
         } else if (res.code === '0') {
-            // 登陆成功
+            alert(res.msg);
             window.location.reload();
             $('.close').click();
         }
@@ -149,7 +149,7 @@ $('#login-submit').click(function() {
             alert(res.msg);
             return false;
         } else if (res.code === '0') {
-            // 登陆成功
+            alert(res.msg);
             window.location.reload();
             $('.close').click();
         }
@@ -166,8 +166,15 @@ $('.close').click(function() {
 
 // 注销事件
 $('#cancellation').click(function() {
-    $.get('login/logOut',function () {
-        window.location.href = 'index';
+    $.get('login/logOut',function (res) {
+
+        if (res.code === '0') {
+            alert(res.msg);
+            window.location.href = 'index';
+        } else {
+            alert("注销失败");
+        }
+
     })
 });
 
@@ -175,3 +182,15 @@ $('#cancellation').click(function() {
 $('#userName').click(function () {
     window.location.href = 'userCenter';
 });
+
+// 用户名改变时清空密码
+$("#loginName").bind("change", function () {
+    $("#loginpwd").val("");
+})
+
+// 登陆弹框
+function showMsg(msg) {
+    $("#showMsg").html(msg);
+    $("#showMsg").show();
+    return true;
+}

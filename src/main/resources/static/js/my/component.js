@@ -9,13 +9,13 @@ Vue.component('change-password', {
     template: `<div id="changePass">
                 <div class="input-margin">
                         <div class="input-group">
-                            <span class="input-group-addon">原密码:</span>
+                            <span class="input-group-addon">原密码      :</span>
                             <input type="password" v-model="oldPass" @blur="oldPssVer" class="form-control" id="registerName" placeholder="请输入原密码" aria-describedby="basic-addon3">
                             <p class="err-tips">{{tips1}}</p>
                         </div>
 
                         <div class="input-group">
-                            <span class="input-group-addon">新密码:</span>
+                            <span class="input-group-addon">新密码      :</span>
                             <input type="password" v-model="pwd1" @blur="pwd1Ver" class="form-control" id="registerPwd" placeholder="请输入密码" aria-describedby="basic-addon3">
                             <p class="err-tips">{{tips2}}</p>
                         </div>
@@ -24,7 +24,7 @@ Vue.component('change-password', {
                             <input type="password" v-model="pwd2" @blur="pwd2Ver" class="form-control" id="registerPwd2" placeholder="请再次输入密码" aria-describedby="basic-addon3">
                             <p class="err-tips">{{tips3}}</p>
                         </div>
-                        <button type="button" id="register-submit" class="btn btn-default btn-submit" @click="changePass">修改</button>
+                        <button type="button" id="register-submit" class="btn btn-success btn-submit" @click="changePass">修改</button>
                 </div>
             </div>`,
     props: [],
@@ -103,7 +103,7 @@ Vue.component('change-address', {
                             <input type="text" v-model="address" @blur="pwd2Ver" class="form-control" id="registerPwd2" placeholder="请输入收货地址" aria-describedby="basic-addon3">
                             <p class="err-tips">{{tips3}}</p>
                         </div>
-                        <button type="button" id="register-submit" class="btn btn-default btn-submit" @click="changePass">{{wantChange.id?'修改':'添加'}}</button>
+                        <button type="button" id="register-submit" class="btn btn-success btn-submit" @click="changePass">{{wantChange.id?'修改':'添加'}}</button>
                         <button type="button" id="register-submit" v-if="wantChange.id" class="btn btn-default btn-submit" @click="cancel">取消</button>
                 </div>
                 <el-table
@@ -243,15 +243,15 @@ Vue.component('change-address', {
 Vue.component('order-list', {
     template: `<div id="orderList">
                 <div class="order" v-for="item in listData">
-                    <span class="orderNum">订单号：{{item.orderNo}}</span>
-                    <span class="orderTime">时间：{{item.timeStamp}}</span>
+                    <p class="orderNum">订单号：{{item.orderNo}}</p>
+                    <p class="orderTime">时间：{{item.timeStamp}}</p>
+                    <p class="address">{{item.address}}</p>
                     <div class="course" v-for="courseItem in item.courses">
                         <span class="coursePrice">{{courseItem.course.name}}</span>
                         <span class="courseCount">/{{courseItem.course.price|money}}</span>
                         <span class="courseName">&emsp;× {{courseItem.count}}</span>
                     </div>
-                    <span class="orderTime">总价：{{item.totalPrice}}</span><br/>
-                    <span class="orderNum">地址：{{item.address}}</span>
+                    <p class="totalPrice">总价：<span>{{item.totalPrice|money}}</span></p>
                 </div>
                 <div id="page-margin">
                     <el-pagination layout="prev, pager, next" :page-count="pageCount" :current-page="currentPage">
@@ -283,18 +283,18 @@ Vue.component('order-list', {
 });
 
 Vue.component('admin-order-list', {
-    template: `<div id="orderList">
+    template: `<div id="adminList">
                 <div class="order" v-for="item in listData">
-                    <span class="orderNum">订单号：{{item.orderNo}}</span>
-                    <span class="orderTime">时间：{{item.timeStamp}}</span>
+                    <p class="orderNum">订单号：{{item.orderNo}}</p>
+                    <p class="orderTime">时间：{{item.timeStamp}}</p>
+                    <p class="address">地址：{{item.address}}</p>
                     <div class="course" v-for="courseItem in item.courses">
                         <span class="coursePrice">{{courseItem.course.name}}</span>
                         <span class="courseCount">/{{courseItem.course.price|money}}</span>
                         <span class="courseName">&emsp;× {{courseItem.count}}</span>
                     </div>
-                    <span class="orderTime">总价：{{item.totalPrice}}</span><br/>
-                    <span class="orderNum">地址：{{item.address}}</span> <br />
-                    <el-button type="primary" :disabled="item.state === 0" style="margin-left:350px;" @click="distribute(item)">配送</el-button>
+                    <p class="totalPrice">总价：<span>{{item.totalPrice|money}}</span></p>
+                    <el-button type="primary" :disabled="item.state === 0" style="margin-left:320px;width: 120px" @click="distribute(item)">配送</el-button>
                 </div>
                 
                 <div id="page-margin">
@@ -326,7 +326,6 @@ Vue.component('admin-order-list', {
     methods: {
         init() {
             $.get('manager/getOrderList', { page: this.currentPage }, (res) => {
-                console.log('getOrderList', res);
                 this.pageCount = res.totalPages;
                 this.listData = res.content.map(item => {
                     return Object.assign({ courses: JSON.parse(item.coursesString) }, item);
@@ -382,7 +381,7 @@ Vue.component('change-food', {
                 </div>
                 <ul class="list-group mid-margin">
                     <li class="list-group-item list-item" :class="{isSelect:item.num>0}" v-for="(item,index) in list">
-                        <div class="img-margin"><img :src="item.img||'img/001.jpg'" alt=""></div>
+                        <div class="img-margin"><img :src="item.img||'img/001.png'" alt=""></div>
                         <span class="text title" v-text="item.name"></span>
                         <span class="text volume" v-cloak>销量：{{item.volume||0}}</span>
                         <span class="text price" v-cloak>价格：<span>{{item.price|money}}</span></span>
