@@ -73,7 +73,7 @@ var vm = new Vue({
                 }
             });
 
-            if (getResult && user.id) {
+            if (!getResult && !user.id) {
                 this.$message({
                     showClose: true,
                     message: '登陆后才能提交订单，请登录'
